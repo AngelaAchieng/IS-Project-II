@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class RequirementType extends Model
 {
     use HasFactory;
+
+    //properties
+    protected $table = "requirementtype";
+    protected $primaryKey = "RequirementType_id";
+    protected $fillable = ['RequirementType_Name'];
+    
+    //relationships( Requirement type(hardware) has many requirements(servers))
+    public function requirements(){
+        return $this->hasMany(Requirement::class);
+    }
 }

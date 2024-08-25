@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Milestone extends Model
 {
     use HasFactory;
+
+    //properties
+    protected $table = "milestones";
+    protected $primaryKey = "Milestone_id";
+    protected $fillable = ['Milestone_description', 'Milestone_timeline', 'Milestone_dates', 'project_id'];
+
+    //relationships (a milestone belongs to a project)
+    public function project(){
+        return $this->belongsTo(Project::class,'project_id','Project_id');
+    }
 }
