@@ -10,7 +10,7 @@ class RoleController extends Controller
     //Display all roles
     public function all(){
 
-        $allRoles = Role::all();
+        $allRoles = Role::all() ->toArray();
         dd($allRoles);
     }
 
@@ -24,7 +24,7 @@ class RoleController extends Controller
     public function edit(){}
 
     //Save changes made
-    public function saveChanges(){}
+    public function update(){}
 
     //Delete role
     public function delete(){}

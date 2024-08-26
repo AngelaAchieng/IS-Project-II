@@ -24,7 +24,7 @@ class UserController extends Controller
     public function edit(){}
 
     //Save changes made
-    public function saveChanges(){}
+    public function update(){}
 
     //Delete user
     public function delete(){}

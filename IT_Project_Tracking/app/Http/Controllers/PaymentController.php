@@ -24,7 +24,7 @@ class PaymentController extends Controller
     public function edit(){}
 
     //Save changes made
-    public function saveChanges(){}
+    public function update(){}
 
     //Delete payment
     public function delete(){}

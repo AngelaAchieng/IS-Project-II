@@ -24,7 +24,7 @@ class RequirementtypeController extends Controller
     public function edit(){}
 
     //Save changes made
-    public function saveChanges(){}
+    public function update(){}
 
     //Delete requirementtype
     public function delete(){}

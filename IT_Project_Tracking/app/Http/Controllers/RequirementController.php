@@ -24,7 +24,7 @@ class RequirementController extends Controller
     public function edit(){}
 
     //Save changes made
-    public function saveChanges(){}
+    public function update(){}
 
     //Delete requirements
     public function delete(){}
