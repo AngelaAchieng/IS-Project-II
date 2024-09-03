@@ -10,8 +10,9 @@ class RequirementtypeController extends Controller
     //Display all requirementtype
     public function all(){
 
-        $allRequirementtype = RequirementType::all();
-        dd($allRequirementtype);
+        $allRequirementtypes = RequirementType::all();
+        
+        return view('requirementtype.all',['requirementtypes' => $allRequirementtypes]);
     }
 
     //Add a requirementtype

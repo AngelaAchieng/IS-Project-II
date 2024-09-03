@@ -10,7 +10,7 @@ class RequirementType extends Model
     use HasFactory;
 
     //properties
-    protected $table = "requirementtype";
+    protected $table = "requirementtypes";
     protected $primaryKey = "RequirementType_id";
     protected $fillable = ['RequirementType_Name'];
     

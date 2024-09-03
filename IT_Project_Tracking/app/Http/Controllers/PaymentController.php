@@ -11,7 +11,8 @@ class PaymentController extends Controller
     public function all(){
 
         $allPayments = Payment::all();
-        dd($allPayments);
+        
+        return view('payment.all',['payments' => $allPayments]);
     }
 
     //Add a payment

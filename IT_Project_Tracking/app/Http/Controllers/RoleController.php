@@ -10,8 +10,9 @@ class RoleController extends Controller
     //Display all roles
     public function all(){
 
-        $allRoles = Role::all() ->toArray();
-        dd($allRoles);
+        $allRoles = Role::all();
+
+        return view('role.all',['roles' => $allRoles]);
     }
 
     //Add a role

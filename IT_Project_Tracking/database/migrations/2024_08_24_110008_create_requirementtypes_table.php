@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRequirementtypeTable extends Migration
+class CreateRequirementtypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRequirementtypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('requirementtype', function (Blueprint $table) {
+        Schema::create('requirementtypes', function (Blueprint $table) {
             $table->increments('RequirementType_id');
             $table->string('RequirementType_Name', 20);
         });
@@ -26,6 +26,6 @@ class CreateRequirementtypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('requirementtype');
+        Schema::dropIfExists('requirementtypes');
     }
 }

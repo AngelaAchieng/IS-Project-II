@@ -11,7 +11,8 @@ class RequirementController extends Controller
     public function all(){
 
         $allRequirements = Requirement::all();
-        dd($allRequirements);
+        
+        return view('requirement.all',['requirements' => $allRequirements]);
     }
 
     //Add a requirement

@@ -11,7 +11,9 @@ class MilestoneController extends Controller
     public function all(){
 
         $allMilestones = Milestone::all();
-        dd($allMilestones);
+
+        return view('milestone.all',['milestones' => $allMilestones]);
+        
     }
 
     //Add a milestone

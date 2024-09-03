@@ -11,7 +11,8 @@ class UserController extends Controller
     public function all(){
 
         $allUsers = User::all();
-        dd($allUsers);
+        
+        return view('user.all',['users' => $allUsers]);
     }
 
     //Add a user

@@ -11,7 +11,8 @@ class ProjectController extends Controller
     public function all(){
 
         $allProjects = Project::all();
-        dd($allProjects);
+        
+        return view('project.all',['projects' => $allProjects]);
     }
 
     //Add a project

@@ -26,13 +26,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('admin', function () {
+    return view('admindashboard');
+});
+
+Route::get('engineer', function () {
+    return view('engineerdashboard');
+});
+
 //roles routes
 Route::get('roles',[RoleController::class,'all']);
 Route::get('role/add',[RoleController::class,'add']);
 Route::post('role/save',[RoleController::class,'save']);
 Route::post('role/update/{Role_id}',[RoleController::class,'update']);
 Route::get('role/edit/{Role_id}',[RoleController::class,'edit']);
-Route::get('role/delete/{Role_id}',[RoleController::class,'delete']);
+Route::get('role/delete/{Role_name}',[RoleController::class,'delete']);
 
 //users routes
 Route::get('users',[UserController::class,'all']);

@@ -25,7 +25,7 @@ class CreateRequirementsTable extends Migration
 
             $table->foreign('project_id')->references('Project_id')->on('projects');
             $table->foreign('organization_id')->references('Organization_id')->on('organizations');
-            $table->foreign('requirementtype_id')->references('RequirementType_id')->on('requirementtype');
+            $table->foreign('requirementtype_id')->references('RequirementType_id')->on('requirementtypes');
         });
     }
 

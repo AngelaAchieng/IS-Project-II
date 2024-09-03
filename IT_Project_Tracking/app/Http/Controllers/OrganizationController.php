@@ -11,7 +11,9 @@ class OrganizationController extends Controller
     public function all(){
 
         $allOrganizations = Organization::all();
-        dd($allOrganizations);
+
+        return view('organization.all',['organizations' => $allOrganizations]);
+        
     }
 
     //Add an organization
