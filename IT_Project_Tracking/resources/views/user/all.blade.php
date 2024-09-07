@@ -24,6 +24,7 @@
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >First Name</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Last Name</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Email</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Role Name</th>
                                 <th class="align-middle text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Actions</th>
                             </tr>
                         </thead>
@@ -34,18 +35,19 @@
                                 <td>{{$user->FirstName}}</td>
                                 <td>{{$user->LastName}}</td>
                                 <td>{{$user->Email}}</td>
+                                <td>{{$user->role->Role_name}}</td>
                                 <td class="align-middle text-center text-sm">
                                     <a href="{{URL::to('user/edit/'.$user->User_id)}}">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
-                                    <a href="{{URL::to('user/delete/'.$user->User_id)}}">
-                                        <i class="fa-solid fa-trash"></i>
+                                    <a onclick= "return confirm('Are you sure?')" href="{{URL::to('user/delete/'.$user->User_id)}}">
+                                        <i class="fa-solid fa-trash-can"></i>
                                     </a>
                                 </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5">No record</td>
+                                <td colspan="6">No record</td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -55,5 +57,18 @@
         </div>
     </div>
 </div>
+
+@endsection
+
+@section('scripts')
+    @if(session('status'))
+        <script type="text/javascript">
+            iziToast.show({
+                icon: 'fa-solid fa-circle-check',
+                message: "{{session('status')}}",
+                position: 'topRight'
+            });
+        </script>
+    @endif
 
 @endsection

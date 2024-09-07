@@ -8,7 +8,7 @@
 <div class="row">
     <div class='col-12'>
 
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-center">
             <a class="btn btn-dark" href="{{URL::to('requirementtype/add')}}">
                 <i class="fas fa-plus"></i> Add Requirement Type
             </a>
@@ -35,8 +35,8 @@
                                     <a href="{{URL::to('requirementtype/edit/'.$requirementtype->RequirementType_id)}}">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
-                                    <a href="{{URL::to('requirementtype/delete/'.$requirementtype->RequirementType_id)}}">
-                                        <i class="fa-solid fa-trash"></i>
+                                    <a onclick= "return confirm('Are you sure?')" href="{{URL::to('requirementtype/delete/'.$requirementtype->RequirementType_id)}}">
+                                        <i class="fa-solid fa-trash-can"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -52,5 +52,18 @@
         </div>
     </div>
 </div>
+
+@endsection
+
+@section('scripts')
+    @if(session('status'))
+        <script type="text/javascript">
+            iziToast.show({
+                icon: 'fa-solid fa-circle-check',
+                message: "{{session('status')}}",
+                position: 'topRight'
+            });
+        </script>
+    @endif
 
 @endsection

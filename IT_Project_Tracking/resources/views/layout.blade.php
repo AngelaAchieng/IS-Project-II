@@ -18,22 +18,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
-  <link rel="icon" type="image/png" href="img/next-logo.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="'{{URL::to('img/apple-icon.png')}}">
+  <link rel="icon" type="image/png" href="{{URL::to('img/next-logo.png')}}">
   <title>
     @yield('pageTitle') Next Technologies
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
-  <link href="css/nucleo-icons.css" rel="stylesheet" />
-  <link href="css/nucleo-svg.css" rel="stylesheet" />
+  <link href="{{URL::to('css/nucleo-icons.css')}}" rel="stylesheet" />
+  <link href="{{URL::to('css/nucleo-svg.css')}}" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/ed48d1600b.js" crossorigin="anonymous"></script>
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
-  <link id="pagestyle" href="css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+  <link id="pagestyle" href="{{URL::to('css/material-dashboard.css?v=3.1.0')}}" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -44,14 +44,14 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
-        <img src="img/logo.png" class="navbar-brand-img h-100" alt="main_logo" width="170px" >
+        <img src="{{URL::to('img/logo.png')}}" class="navbar-brand-img h-100" alt="main_logo" width="170px" >
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-danger active" href="{{URL::to('/')}}">
+          <a class="nav-link text-white {{(request() ->is('/')) ? 'active': ''}}" href="{{URL::to('/')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
              <i class="nav-icon fa-solid fa-window-maximize"></i>
             </div>
@@ -62,7 +62,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Manage</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="{{URL::to('roles')}}">
+          <a class="nav-link text-white {{(request() ->is('role*')) ? 'active': ''}}" href="{{URL::to('roles')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
              <i class="fa-solid fa-user-gear"></i>
             </div>
@@ -70,7 +70,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="{{URL::to('users')}}">
+          <a class="nav-link text-white {{(request() ->is('user*')) ? 'active': ''}}" href="{{URL::to('users')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
              <i class="fas fa-users"></i>
             </div>
@@ -78,7 +78,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="{{URL::to('organizations')}}">
+          <a class="nav-link text-white {{(request() ->is('organization*')) ? 'active': ''}}" href="{{URL::to('organizations')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
              <i class="fa-solid fa-sitemap"></i>
             </div>
@@ -86,7 +86,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="{{URL::to('projects')}}">
+          <a class="nav-link text-white {{(request() ->is('project*')) ? 'active': ''}}" href="{{URL::to('projects')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
              <i class="fa-solid fa-diagram-project"></i>
             </div>
@@ -94,7 +94,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="{{URL::to('requirementtypes')}}">
+          <a class="nav-link text-white {{(request() ->is('requirementtype*')) ? 'active': ''}}" href="{{URL::to('requirementtypes')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
              <i class="fa-solid fa-diagram-project"></i>
             </div>
@@ -102,7 +102,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="{{URL::to('requirements')}}">
+          <a class="nav-link text-white {{(request() ->is('requirements*')) ? 'active': ''}}" href="{{URL::to('requirements')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
              <i class="fa-solid fa-diagram-project"></i>
             </div>
@@ -110,7 +110,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="{{URL::to('milestones')}}">
+          <a class="nav-link text-white {{(request() ->is('milestone*')) ? 'active': ''}}" href="{{URL::to('milestones')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
              <i class="fa-solid fa-diagram-project"></i>
             </div>
@@ -118,7 +118,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="{{URL::to('payments')}}">
+          <a class="nav-link text-white {{(request() ->is('payment*')) ? 'active': ''}}" href="{{URL::to('payments')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
@@ -259,27 +259,16 @@
         <div>
           <h6 class="mb-0">Sidebar Colors</h6>
         </div>
-        <a href="javascript:void(0)" class="switch-trigger background-color">
+        <a href="{{URL::to('javascript:void(0)')}}" class="switch-trigger background-color">
           <div class="badge-colors my-2 text-start">
             <span class="badge filter bg-gradient-primary" data-color="primary" onclick="sidebarColor(this)"></span>
             <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
             <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
             <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
             <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-danger active" data-color="danger" onclick="sidebarColor(this)"></span>
+            <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
           </div>
         </a>
-        <!-- Sidenav Type -->
-        <div class="mt-3">
-          <h6 class="mb-0">Sidenav Type</h6>
-          <p class="text-sm">Choose between 2 different sidenav types.</p>
-        </div>
-        <div class="d-flex">
-          <button class="btn bg-gradient-dark px-3 mb-2 active" data-class="bg-gradient-dark" onclick="sidebarType(this)">Dark</button>
-          <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-transparent" onclick="sidebarType(this)">Transparent</button>
-          <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-white" onclick="sidebarType(this)">White</button>
-        </div>
-        <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
         <!-- Navbar Fixed -->
         <div class="mt-3 d-flex">
           <h6 class="mb-0">Navbar Fixed</h6>
@@ -297,11 +286,11 @@
     </div>
   </div>
   <!--   Core JS Files   -->
-  <script src="js/core/popper.min.js"></script>
-  <script src="js/core/bootstrap.min.js"></script>
-  <script src="js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="js/plugins/chartjs.min.js"></script>
+  <script src="{{URL::to('js/core/popper.min.js')}}"></script>
+  <script src="{{URL::to('js/core/bootstrap.min.js')}}"></script>
+  <script src="{{URL::to('js/plugins/perfect-scrollbar.min.js')}}"></script>
+  <script src="{{URL::to('js/plugins/smooth-scrollbar.min.js')}}"></script>
+  <script src="{{URL::to('js/plugins/chartjs.min.js')}}"></script>
   <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
@@ -558,10 +547,8 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="js/material-dashboard.min.js?v=3.1.0"></script>
+  <script src="{{URL::to('js/material-dashboard.min.js?v=3.1.0')}}"></script>
 </body>
 
 </html>

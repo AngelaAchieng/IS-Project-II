@@ -16,10 +16,20 @@ class RequirementtypeController extends Controller
     }
 
     //Add a requirementtype
-    public function add(){}
+    public function add(){
+        return view('requirementtype.add');
+    }
 
     //Save a requirementtype
-    public function save(){}
+    public function save(Request $request){
+        $requirementtype_name = $request->get('requirementtype_name');
+
+        $requirementtype = new Requirementtype();
+        $requirementtype->RequirementType_Name =$requirementtype_name;
+        $requirementtype->save();
+
+        return redirect('requirementtypes');
+    }
 
     //Make changes
     public function edit(){}
@@ -28,5 +38,15 @@ class RequirementtypeController extends Controller
     public function update(){}
 
     //Delete requirementtype
-    public function delete(){}
+    public function delete($RequirementType_id){
+
+        $requirementtype = RequirementType::find($RequirementType_id);
+
+        if($requirementtype){
+            $requirementtype->delete();
+            return redirect('requirementtypes')->with('status',"Requirement Type deleted");
+        }else{
+            return redirect('requirementtypes')->with('status',"Requirement Type does not exist");
+        }
+    }
 }

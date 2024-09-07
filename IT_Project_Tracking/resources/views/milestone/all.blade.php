@@ -24,6 +24,7 @@
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Milestone Description</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Milestone Timeline</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Milestone Dates</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Project Name</th>
                                 <th class="align-middle text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Actions</th>
                             </tr>
                         </thead>
@@ -34,12 +35,13 @@
                                 <td>{{$milestone->Milestone_description}}</td>
                                 <td>{{$milestone->Milestone_timeline}}</td>
                                 <td>{{$milestone->Milestone_dates}}</td>
+                                <td>{{$milestone->project->Project_name}}</td>
                                 <td class="align-middle text-center text-sm">
                                     <a href="{{URL::to('milestone/edit/'.$milestone->Milestone_id)}}">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
-                                    <a href="{{URL::to('milestone/delete/'.$milestone->Milestone_id)}}">
-                                        <i class="fa-solid fa-trash"></i>
+                                    <a onclick= "return confirm('Are you sure?')" href="{{URL::to('milestone/delete/'.$milestone->Milestone_id)}}">
+                                        <i class="fa-solid fa-trash-can"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -55,5 +57,18 @@
         </div>
     </div>
 </div>
+
+@endsection
+
+@section('scripts')
+    @if(session('status'))
+        <script type="text/javascript">
+            iziToast.show({
+                icon: 'fa-solid fa-circle-check',
+                message: "{{session('status')}}",
+                position: 'topRight'
+            });
+        </script>
+    @endif
 
 @endsection

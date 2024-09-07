@@ -27,6 +27,8 @@
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Start Date</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >End Date</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Estimated Duration</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Organization Name</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Engineer Name</th>
                                 <th class="align-middle text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Actions</th>
                             </tr>
                         </thead>
@@ -40,12 +42,14 @@
                                 <td>{{$project->StartDate}}</td>
                                 <td>{{$project->EndDate}}</td>
                                 <td>{{$project->EstimatedDuration}}</td>
+                                <td>{{$project->organization->Project_name}}</td>
+                                <td>{{$project->user->User_name}}</td>
                                 <td class="align-middle text-center text-sm">
                                     <a href="{{URL::to('project/edit/'.$project->Project_id)}}">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
-                                    <a href="{{URL::to('project/delete/'.$project->Project_id)}}">
-                                        <i class="fa-solid fa-trash"></i>
+                                    <a onclick= "return confirm('Are you sure?')" href="{{URL::to('project/delete/'.$project->Project_id)}}">
+                                        <i class="fa-solid fa-trash-can"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -61,5 +65,18 @@
         </div>
     </div>
 </div>
+
+@endsection
+
+@section('scripts')
+    @if(session('status'))
+        <script type="text/javascript">
+            iziToast.show({
+                icon: 'fa-solid fa-circle-check',
+                message: "{{session('status')}}",
+                position: 'topRight'
+            });
+        </script>
+    @endif
 
 @endsection

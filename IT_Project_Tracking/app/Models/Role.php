@@ -13,6 +13,7 @@ class Role extends Model
     protected $table = "roles";
     protected $primaryKey = "Role_id";
     protected $fillable = ['Role_name'];
+    public $timestamps = false;
     
     //relationships (Engineer role has many users)
     public function users(){
