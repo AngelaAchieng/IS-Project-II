@@ -23,7 +23,7 @@
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >#</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Milestone Description</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Milestone Timeline</th>
-                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Milestone Dates</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Milestone Date</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Project Name</th>
                                 <th class="align-middle text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Actions</th>
                             </tr>

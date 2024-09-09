@@ -13,6 +13,7 @@ class Requirement extends Model
     protected $table = "requirements";
     protected $primaryKey = "Requirement_id";
     protected $fillable = ['Requirement_name', 'Requirement_description', 'Requirement_quantity', 'UnitPrice', 'requirementtype_id', 'project_id', 'organization_id'];
+    public $timestamps = false;
 
     //relationships (Requirement(server) belongs to a requirementtype)
     public function requiremnttype(){

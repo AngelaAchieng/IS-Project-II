@@ -13,6 +13,7 @@ class RequirementType extends Model
     protected $table = "requirementtypes";
     protected $primaryKey = "RequirementType_id";
     protected $fillable = ['RequirementType_Name'];
+    public $timestamps = false;
     
     //relationships( Requirement type(hardware) has many requirements(servers))
     public function requirements(){

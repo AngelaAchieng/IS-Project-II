@@ -13,6 +13,7 @@ class Organization extends Model
     protected $table = "organizations";
     protected $primaryKey = "Organization_id";
     protected $fillable = ['Organization_name', 'Organization_description'];
+    public $timestamps = false;
     
     //relationships (organization has many projects)
     public function projects(){

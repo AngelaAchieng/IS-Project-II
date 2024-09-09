@@ -35,10 +35,35 @@ class RoleController extends Controller
     }
 
     //Make changes
-    public function edit(){}
+    public function edit($Role_id){
 
-    //Save changes made
-    public function update(){}
+        $role = Role::find($Role_id);
+
+        if($role){
+            return view('role.edit',['role'=>$role]);
+        }else{
+            return redirect('roles');
+        }
+    }
+
+    //Update changes made
+    public function update($Role_id, Request $request){
+
+        $request->validate([
+            'role_name' => 'required|min:2 '
+        ]);
+        
+        $role_name = $request->get('role_name');
+        $role = Role::find($Role_id);
+        
+        if($role){
+            $role->Role_name =$role_name;
+            $role->save();
+            return redirect('roles')->with('status',"$role_name updated");
+        }else{
+            return redirect('roles');
+        }
+    }
 
     //Delete role
     public function delete($Role_id){

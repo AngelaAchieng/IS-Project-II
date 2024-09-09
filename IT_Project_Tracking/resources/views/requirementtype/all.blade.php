@@ -56,11 +56,15 @@
 @endsection
 
 @section('scripts')
-    @if(session('status'))
+    @if (session('status'))
         <script type="text/javascript">
             iziToast.show({
-                icon: 'fa-solid fa-circle-check',
-                message: "{{session('status')}}",
+                titleColor: 'white',
+                messageColor: 'white',
+                icon:'fa-regular fa-circle-check',
+                iconColor: 'white',
+                backgroundColor: '#17c1e8',
+                message:"{{session('status')}}",
                 position: 'topRight'
             });
         </script>

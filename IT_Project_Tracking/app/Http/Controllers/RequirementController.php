@@ -6,7 +6,6 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\Requirement;
 use App\Models\RequirementType;
-use App\Models\Organization;
 
 class RequirementController extends Controller
 {
@@ -22,7 +21,7 @@ class RequirementController extends Controller
     public function add(){
         $requirementtypes = RequirementType::all();
         $projects = Project::all();
-        $organizations = Organization::all();
+       
         return view('requirement.add',['requirementtypes'=>$requirementtypes], ['projects'=>$projects]);
     }
 
@@ -50,7 +49,17 @@ class RequirementController extends Controller
     }
 
     //Make changes
-    public function edit(){}
+    public function edit($Requirement_id){
+        $requirementtypes = RequirementType::all();
+        $projects = Project::all();
+        $requirement = Requirement::find($Requirement_id);
+
+        if($requirement){
+            return view('requirement.edit', ['requirementtypes'=>$requirementtypes], ['projects'=>$projects], ['requirement'=>$requirement]);
+        }else{
+            return redirect('requirements');
+        }
+    }
 
     //Save changes made
     public function update(){}

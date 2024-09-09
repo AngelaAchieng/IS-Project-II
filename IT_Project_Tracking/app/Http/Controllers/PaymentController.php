@@ -36,10 +36,32 @@ class PaymentController extends Controller
     }
 
     //Make changes
-    public function edit(){}
+    public function edit($Payment_id){
+        $projects = Project::all();
+        $payment = Payment::find($Payment_id);
 
-    //Save changes made
-    public function update(){}
+        if($payment){
+            return view('payment.edit',['payment' => $payment], ['projects'=>$projects]);
+        }else{
+            return redirect('payments');
+        }
+    }
+
+    //Update made
+    public function update($Payment_id, Request $request){
+        $payment_amount = $request->get('project_amount');
+        $payment_projectid = $request->get('Project_id');
+        $payment = Payment::find($Payment_id);
+
+        if($payment){
+            $payment->Project_amount =$payment_amount;
+            $payment->project_id =$payment_projectid;
+            $payment->save();
+            return redirect('payments')->with('status','payment updated');
+        }else{
+            return redirect('payments');
+        }
+    }
 
     //Delete payment
     public function delete($Payment_id){

@@ -14,7 +14,7 @@ class Project extends Model
     protected $primaryKey = "Project_id";
     protected $fillable = ['Project_name', 'Project_description', 'Project_proposal', 'StartDate', 'EndDate', 'EstimatedDuration', 'organization_id', 'user_id'];
 
-    //relationships (projects blelong to organizations)
+    //relationships (projects belongs to organizations)
     public function organization(){
         return $this->belongsTo(Organization::class,'organization_id','Organization_id');
     }

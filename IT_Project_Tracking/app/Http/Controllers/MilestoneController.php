@@ -41,10 +41,38 @@ class MilestoneController extends Controller
     }
 
     //Make changes
-    public function edit(){}
+    public function edit($Milestone_id){
+        $projects = Project::all();
+        $milestone = Milestone::find($Milestone_id);
 
-    //Save changes made
-    public function update(){}
+        
+        if($milestone){
+            return view('milestone.edit' ,['milestone'=>$milestone], ['projects'=>$projects]);
+        }else{
+            return redirect('milestones');
+        }
+    }
+
+    //Update made
+    public function update($Milestone_id, Request $request){
+        $milestone_description = $request->get('description');
+        $milestone_timeline = $request->get('timeline');
+        $milestone_date = $request->get('date');
+        $milestone_projectid = $request->get('Project_id');
+        $milestone = Milestone::find($Milestone_id);
+
+        if($milestone){
+            $milestone->Milestone_description =$milestone_description;
+            $milestone->Milestone_timeline =$milestone_timeline;
+            $milestone->Milestone_dates =$milestone_date;
+            $milestone->project_id =$milestone_projectid;
+            $milestone->save();
+    
+            return redirect('milestones')->with('status','milestone updated');
+        }else{
+            return redirect('milestones');
+        }
+    }
 
     //Delete milestone
     public function delete($Milestone_id){

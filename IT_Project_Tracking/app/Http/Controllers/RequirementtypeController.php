@@ -32,10 +32,31 @@ class RequirementtypeController extends Controller
     }
 
     //Make changes
-    public function edit(){}
+    public function edit($RequirementType_id){
 
-    //Save changes made
-    public function update(){}
+        $requirementtype = RequirementType::find($RequirementType_id);
+
+        if($requirementtype){
+            return view('requirementtype.edit',['requirementtype'=>$requirementtype]);
+        }else{
+            return redirect('requirementtypes');
+        }
+    }
+
+    //Update made
+    public function update($RequirementType_id, Request $request){
+        
+        $requirementtype_name = $request->get('requirementtype_name');
+        $requirementtype = RequirementType::find($RequirementType_id);
+        
+        if($requirementtype){
+            $requirementtype->RequirementType_Name =$requirementtype_name;
+            $requirementtype->save();
+            return redirect('requirementtypes')->with('status',"$requirementtype_name updated");
+        }else{
+            return redirect('requirementtypes');
+        }
+    }
 
     //Delete requirementtype
     public function delete($RequirementType_id){

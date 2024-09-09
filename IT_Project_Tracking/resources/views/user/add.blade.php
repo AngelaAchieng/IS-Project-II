@@ -17,7 +17,7 @@
                         <label>Last Name</label>
                         <input type='text' required name="last_name" class="form-control" placeholder="Enter Last Name">
                         <label>Email</label>
-                        <input type='string' pattern='[a-z0-9]+@[a-z0-9]+.[a-z]{2,}$' required name="email" class="form-control" placeholder="Enter Email">
+                        <input type='string' pattern='[A-Za-z0-9\._%+\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,}' required name="email" class="form-control" placeholder="Enter Email">
                         <label>Password</label>
                         <input type='password' pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}' title='Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters' required name="password" class="form-control" placeholder="Enter Password">
                         <select name="Role_id" id="Role_id" class="form-control">

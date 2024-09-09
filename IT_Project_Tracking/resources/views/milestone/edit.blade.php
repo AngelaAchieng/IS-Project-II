@@ -1,19 +1,23 @@
 @extends('layout')
 
-@section('headTitle','Add Payment - ')
-@section('pageTitle','Add Payment')
+@section('headTitle','Add Milestone - ')
+@section('pageTitle','Add Milestone')
 
 @section('content')
 
-<form id="add-milestone-form" method="post" action="{{URL::to('payment/save')}}">
+<form id="edit-milestone-form" method="post" action="{{URL::to('milestone/update/'.$milestone->Milestone_id)}}">
     @csrf
     <div class="row">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
                     <div class="form-group">
-                        <label>Project Amount</label>
-                        <input type='integer' required name="project_amount" class="form-control" placeholder="Enter Amount">
+                        <label>Milestone Description</label>
+                        <input type='text' value="{{$milestone->Milestone_description}}" required name="description" class="form-control" placeholder="Enter Description">
+                        <label>Milestone timeline</label>
+                        <input type='text' value="{{$milestone->Milestone_timeline}}" required name="timeline" class="form-control" placeholder="Enter Timeline">
+                        <label>Milestone Dates</label>
+                        <input type='date' value="{{$milestone->Milestone_dates}}" required name="date" class="form-control">
                         <select name="Project_id" id="Project_id" class="form-control">
                             <option value="">Please select Project</option>
                             @foreach($projects as $project)

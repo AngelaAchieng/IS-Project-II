@@ -34,7 +34,7 @@
                                     <a href="{{URL::to('role/edit/'.$role->Role_id)}}">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
-                                    <a onclick= "return confirm('Are you sure?')" href="{{URL::to('role/delete/'.$role->Role_id)}}">
+                                    <a onclick="return confirm('Are you sure?')" href="{{URL::to('role/delete/'.$role->Role_id)}}">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
                                 </td>
@@ -54,12 +54,17 @@
 
 @endsection
 
+
 @section('scripts')
-    @if(session('status'))
+    @if (session('status'))
         <script type="text/javascript">
             iziToast.show({
-                icon: 'fa-solid fa-circle-check',
-                message: "{{session('status')}}",
+                titleColor: 'white',
+                messageColor: 'white',
+                icon:'fa-regular fa-circle-check',
+                iconColor: 'white',
+                backgroundColor: '#17c1e8',
+                message:"{{session('status')}}",
                 position: 'topRight'
             });
         </script>

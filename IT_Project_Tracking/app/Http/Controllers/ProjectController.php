@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\User;
-use App\Models\Organization;
 
 class ProjectController extends Controller
 {
@@ -40,7 +40,7 @@ class ProjectController extends Controller
         $project->Project_description =$project_description;
         $project->Project_proposal =$project_proposal;
         $project->StartDate =$project_startdate;
-        $project->EndDate =$project_endate;
+        $project->EndDate =$project_enddate;
         $project->organization_id =$project_organizationid;
         $project->user_id =$project_userid;
         $project->save();
@@ -49,7 +49,18 @@ class ProjectController extends Controller
     }
 
     //Make changes
-    public function edit(){}
+    public function edit($Project_id){
+        
+        $users = User::all();
+        $organizations = Organization::all();
+        $project = Project::find($Project_id);
+
+        if($project){
+            return view('project.edit' ,['project'=>$project] ,['organizations'=>$organizations] ,['users'=>$users]);
+        }else{
+            return redirect('projects');
+        }
+    }
 
     //Save changes made
     public function update(){}
