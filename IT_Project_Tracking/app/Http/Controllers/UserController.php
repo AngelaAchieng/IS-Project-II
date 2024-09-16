@@ -87,4 +87,9 @@ class UserController extends Controller
             return redirect('users')->with('status',"User does not exist");
         }
     }
+
+    //User login
+    public function login(){
+        return view('user.login');  
+    }
 }
