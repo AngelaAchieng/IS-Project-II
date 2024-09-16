@@ -1,11 +1,11 @@
 @extends('layout')
 
-@section('headTitle','Add Requirement - ')
-@section('pageTitle','Add Requirement')
+@section('headTitle','Edit Requirement - ')
+@section('pageTitle','Edit Requirement')
 
 @section('content')
 
-<form id="add-requirement-form" method="post" action="{{URL::to('requirement/update/'.$requirement->Requirement_id)}}">
+<form id="edit-requirement-form" method="post" action="{{URL::to('requirement/update/'.$requirement->Requirement_id)}}">
     @csrf
     <div class="row">
         <div class="col-md-6">

@@ -12,7 +12,7 @@ class User extends Model
     //properties
     protected $table = "users";
     protected $primaryKey = "User_id";
-    protected $fillable = ['FirstName', 'LastName', 'Email', 'Password', 'role_id'];
+    protected $fillable = ['UserName', 'Email', 'Password', 'role_id'];
 
     //relationships (Jane(user) belongs to Admin role)
     public function role(){

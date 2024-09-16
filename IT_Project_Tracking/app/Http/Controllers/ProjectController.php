@@ -31,8 +31,8 @@ class ProjectController extends Controller
         $project_proposal = $request->get('project_proposal');
         $project_startdate = $request->get('start_date');
         $project_enddate = $request->get('end_date');
-        $project_organizationid = $request->get('Organization_id');
         $project_userid = $request->get('User_id');
+        $project_organizationid = $request->get('Organization_id');
 
 
         $project = new Project();
@@ -41,8 +41,8 @@ class ProjectController extends Controller
         $project->Project_proposal =$project_proposal;
         $project->StartDate =$project_startdate;
         $project->EndDate =$project_enddate;
-        $project->organization_id =$project_organizationid;
         $project->user_id =$project_userid;
+        $project->organization_id =$project_organizationid;
         $project->save();
 
         return redirect('projects');
@@ -56,14 +56,39 @@ class ProjectController extends Controller
         $project = Project::find($Project_id);
 
         if($project){
-            return view('project.edit' ,['project'=>$project] ,['organizations'=>$organizations] ,['users'=>$users]);
+            return view('project.edit',['users'=>$users],['organizations'=>$organizations],['project'=>$project]);
         }else{
             return redirect('projects');
         }
     }
 
     //Save changes made
-    public function update(){}
+    public function update($Project_id, Request $request){
+        $project_name = $request->get('project_name');
+        $project_description = $request->get('project_description');
+        $project_proposal = $request->get('project_proposal');
+        $project_startdate = $request->get('start_date');
+        $project_enddate = $request->get('end_date');
+        $project_userid = $request->get('User_id');
+        $project_organizationid = $request->get('Organization_id');
+
+        $project = Project::find($Project_id);
+
+        if($project){
+            $project->Project_name =$project_name;
+            $project->Project_description =$project_description;
+            $project->Project_proposal =$project_proposal;
+            $project->StartDate =$project_startdate;
+            $project->EndDate =$project_enddate;
+            $project->user_id =$project_userid;
+            $project->organization_id =$project_organizationid;
+            $project->save();
+    
+            return redirect('projects')->with('status','project updated');
+        }else{
+            return redirect('projects');
+        }
+    }
 
     //Delete projects
     public function delete($Project_id){

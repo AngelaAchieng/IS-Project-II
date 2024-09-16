@@ -25,17 +25,15 @@ class UserController extends Controller
 
     //Save user
     public function save(Request $request){
-        $user_firstname = $request->get('first_name');
-        $user_lastname = $request->get('last_name');
+        $user_usersname = $request->get('users_names');
         $user_email = $request->get('email');
         $user_password = Hash::make($request->get('password'));
         $user_roleid = $request->get('Role_id');
 
         $user = new User();
-        $user->FirstName =$user_firstname;
-        $user->LastName =$user_lastname;
-        $user->Password =$user_password;
+        $user->UserName =$user_usersname;
         $user->Email =$user_email;
+        $user->Password =$user_password;
         $user->role_id =$user_roleid;
         $user->save();
 
@@ -49,7 +47,7 @@ class UserController extends Controller
         $user = User::find($User_id);
 
         if($user){
-            return view('user.edit', ['roles'=>$roles], ['user'=>$user]);
+            return view('user.edit', ['user'=>$user], ['roles'=>$roles]);
         }else{
             return redirect('users');
         }
@@ -57,8 +55,7 @@ class UserController extends Controller
 
     //Update made
     public function update($User_id, Request $request){
-        $user_firstname = $request->get('first_name');
-        $user_lastname = $request->get('last_name');
+        $user_usersname = $request->get('users_names');
         $user_email = $request->get('email');
         $user_password = Hash::make($request->get('password'));
         $user_roleid = $request->get('Role_id');
@@ -66,10 +63,9 @@ class UserController extends Controller
         $user = User::find($User_id);
 
         if($user){
-            $user->FirstName =$user_firstname;
-            $user->LastName =$user_lastname;
-            $user->Password =$user_password;
+            $user->UserName =$user_usersname;
             $user->Email =$user_email;
+            $user->Password =$user_password;
             $user->role_id =$user_roleid;
             $user->save();
     

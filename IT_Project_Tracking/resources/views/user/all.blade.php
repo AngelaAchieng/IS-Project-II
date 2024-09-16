@@ -21,8 +21,7 @@
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >#</th>
-                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >First Name</th>
-                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Last Name</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Users Names</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Email</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Role Name</th>
                                 <th class="align-middle text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Actions</th>
@@ -32,8 +31,7 @@
                             @forelse($users as $user)
                             <tr>
                                 <td>{{$user->User_id}}</td>
-                                <td>{{$user->FirstName}}</td>
-                                <td>{{$user->LastName}}</td>
+                                <td>{{$user->UserName}}</td>
                                 <td>{{$user->Email}}</td>
                                 <td>{{$user->role->Role_name}}</td>
                                 <td class="align-middle text-center text-sm">
@@ -47,7 +45,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="6">No record</td>
+                                <td colspan="5">No record</td>
                             </tr>
                             @endforelse
                         </tbody>

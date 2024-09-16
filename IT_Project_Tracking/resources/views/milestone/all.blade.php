@@ -22,7 +22,7 @@
                             <tr>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >#</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Milestone Description</th>
-                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Milestone Timeline</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Milestone Duration</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Milestone Date</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Project Name</th>
                                 <th class="align-middle text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Actions</th>
@@ -33,7 +33,7 @@
                             <tr>
                                 <td>{{$milestone->Milestone_id}}</td>
                                 <td>{{$milestone->Milestone_description}}</td>
-                                <td>{{$milestone->Milestone_timeline}}</td>
+                                <td>{{$milestone->Milestone_duration}}</td>
                                 <td>{{$milestone->Milestone_dates}}</td>
                                 <td>{{$milestone->project->Project_name}}</td>
                                 <td class="align-middle text-center text-sm">
@@ -47,7 +47,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5">No record</td>
+                                <td colspan="6">No record</td>
                             </tr>
                             @endforelse
                         </tbody>

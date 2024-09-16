@@ -12,10 +12,8 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-group">
-                        <label>First Name</label>
-                        <input type='text' required name="first_name" class="form-control" placeholder="Enter First Name">
-                        <label>Last Name</label>
-                        <input type='text' required name="last_name" class="form-control" placeholder="Enter Last Name">
+                        <label>Users Names</label>
+                        <input type='text' required name="users_names" class="form-control" placeholder="Enter Users Names">
                         <label>Email</label>
                         <input type='string' pattern='[A-Za-z0-9\._%+\-]+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,}' required name="email" class="form-control" placeholder="Enter Email">
                         <label>Password</label>

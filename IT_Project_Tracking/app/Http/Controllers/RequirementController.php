@@ -40,9 +40,8 @@ class RequirementController extends Controller
         $requirement->Requirement_description =$requirement_description;
         $requirement->Requirement_quantity =$requirement_quantity;
         $requirement->UnitPrice =$requirement_price;
-        $requirement->requirementtype_id =$requirement_requirementtypeid;
+        $requirement->requirementtype_id=$requirement_requirementtypeid;
         $requirement->project_id =$requirement_projectid;
-
         $requirement->save();
 
         return redirect('requirements');
@@ -55,14 +54,37 @@ class RequirementController extends Controller
         $requirement = Requirement::find($Requirement_id);
 
         if($requirement){
-            return view('requirement.edit', ['requirementtypes'=>$requirementtypes], ['projects'=>$projects], ['requirement'=>$requirement]);
+            return view('requirement.edit',['requirementtypes'=>$requirementtypes],['projects'=>$projects],['requirement'=>$requirement]);
         }else{
             return redirect('requirements');
         }
     }
 
     //Save changes made
-    public function update(){}
+    public function update($Requirement_id, Request $request){
+        $requirement_name = $request->get('requirement_name');
+        $requirement_description = $request->get('requirement_description');
+        $requirement_quantity = $request->get('requirement_quantity');
+        $requirement_price = $request->get('unit_price');
+        $requirement_requirementtypeid = $request->get('RequirementType_id');
+        $requirement_projectid = $request->get('Project_id');
+
+        $requirement = Requirement::find($Requirement_id);
+
+        if($requirement){
+            $requirement->Requirement_name =$requirement_name;
+            $requirement->Requirement_description =$requirement_description;
+            $requirement->Requirement_quantity =$requirement_quantity;
+            $requirement->UnitPrice =$requirement_price;
+            $requirement->requirementtype_id=$requirement_requirementtypeid;
+            $requirement->project_id =$requirement_projectid;
+            $requirement->save();
+    
+            return redirect('requirements')->with('status','requirement updated');
+        }else{
+            return redirect('requirements');
+        }
+    }
 
     //Delete requirements
     public function delete($Requirement_id){

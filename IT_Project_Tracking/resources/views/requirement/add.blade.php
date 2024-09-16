@@ -20,12 +20,14 @@
                         <input type='integer' required name="requirement_quantity" class="form-control" placeholder="Enter Quantity">
                         <label>Unit Price</label>
                         <input type='integer' required name="unit_price" class="form-control" placeholder="Enter Price">
+
                         <select name="RequirementType_id" id="RequirementType_id" class="form-control">
                             <option value="">Please select Requirement Type</option>
                             @foreach($requirementtypes as $requirementtype)
-                                <option value="{{$requirementtype->RequirementType_id}}">{{$requirementtype->RequirementType_name}}</option>
+                                <option value="{{$requirementtype->RequirementType_id}}">{{$requirementtype->RequirementType_Name}}</option>
                             @endforeach
                         </select>
+                        
                         <select name="Project_id" id="Project_id" class="form-control">
                             <option value="">Please select Project</option>
                             @foreach($projects as $project)

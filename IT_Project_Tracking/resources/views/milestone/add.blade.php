@@ -14,8 +14,8 @@
                     <div class="form-group">
                         <label>Milestone Description</label>
                         <input type='text' required name="description" class="form-control" placeholder="Enter Description">
-                        <label>Milestone timeline</label>
-                        <input type='text' required name="timeline" class="form-control" placeholder="Enter Timeline">
+                        <label>Milestone duration</label>
+                        <input type='text' required name="duration" class="form-control" placeholder="Enter Duration">
                         <label>Milestone Dates</label>
                         <input type='date' required name="date" class="form-control">
                         <select name="Project_id" id="Project_id" class="form-control">

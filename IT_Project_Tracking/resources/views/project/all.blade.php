@@ -26,9 +26,8 @@
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Project Proposal</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Start Date</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >End Date</th>
-                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Estimated Duration</th>
-                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Organization Name</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Engineer Name</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Organization Name</th>
                                 <th class="align-middle text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Actions</th>
                             </tr>
                         </thead>
@@ -41,9 +40,8 @@
                                 <td>{{$project->Project_proposal}}</td>
                                 <td>{{$project->StartDate}}</td>
                                 <td>{{$project->EndDate}}</td>
-                                <td>{{$project->EstimatedDuration}}</td>
-                                <td>{{$project->organization->Project_name}}</td>
-                                <td>{{$project->user->User_name}}</td>
+                                <td>{{$project->user->UserName}}</td>
+                                <td>{{$project->organization->Organization_name}}</td>
                                 <td class="align-middle text-center text-sm">
                                     <a href="{{URL::to('project/edit/'.$project->Project_id)}}">
                                         <i class="fa-solid fa-pen-to-square"></i>
@@ -55,7 +53,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="8">No record</td>
+                                <td colspan="9">No record</td>
                             </tr>
                             @endforelse
                         </tbody>

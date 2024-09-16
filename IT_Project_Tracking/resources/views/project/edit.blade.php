@@ -23,6 +23,13 @@
                         <label>End Date</label>
                         <input type='date' value="{{$project->EndDate}}" required name="end_date" class="form-control">
 
+                        <select name="User_id" id="User_id" class="form-control">
+                            <option value="">Please select User</option>
+                            @foreach($users as $user)
+                            <option value="{{$user->User_id}}">{{$user->UserName}}</option>
+                            @endforeach
+                        </select>
+                        
                         <select name="Organization_id" id="Organization_id" class="form-control">
                             <option value="">Please select Organization</option>
                             @foreach($organizations as $organization)
@@ -30,12 +37,6 @@
                             @endforeach
                         </select>
 
-                        <select name="User_id" id="User_id" class="form-control">
-                            <option value="">Please select User</option>
-                            @foreach($users as $user)
-                                <option value="{{$user->User_id}}">{{$user->User_name}}</option>
-                            @endforeach
-                        </select>
                     </div>
                     <input type='submit' name="submit" class="form-control btn btn-success">
                 </div>

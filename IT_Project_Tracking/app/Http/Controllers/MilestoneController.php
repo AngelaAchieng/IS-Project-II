@@ -26,13 +26,13 @@ class MilestoneController extends Controller
     //Save a milestone
     public function save(Request $request){
         $milestone_description = $request->get('description');
-        $milestone_timeline = $request->get('timeline');
+        $milestone_duration = $request->get('duration');
         $milestone_date = $request->get('date');
         $milestone_projectid = $request->get('Project_id');
 
         $milestone = new Milestone();
         $milestone->Milestone_description =$milestone_description;
-        $milestone->Milestone_timeline =$milestone_timeline;
+        $milestone->Milestone_duration =$milestone_duration;
         $milestone->Milestone_dates =$milestone_date;
         $milestone->project_id =$milestone_projectid;
         $milestone->save();
@@ -56,14 +56,14 @@ class MilestoneController extends Controller
     //Update made
     public function update($Milestone_id, Request $request){
         $milestone_description = $request->get('description');
-        $milestone_timeline = $request->get('timeline');
+        $milestone_duration = $request->get('duration');
         $milestone_date = $request->get('date');
         $milestone_projectid = $request->get('Project_id');
         $milestone = Milestone::find($Milestone_id);
 
         if($milestone){
             $milestone->Milestone_description =$milestone_description;
-            $milestone->Milestone_timeline =$milestone_timeline;
+            $milestone->Milestone_duration =$milestone_duration;
             $milestone->Milestone_dates =$milestone_date;
             $milestone->project_id =$milestone_projectid;
             $milestone->save();

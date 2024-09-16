@@ -208,6 +208,9 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
+      <div class="mb-md-0 mb-3">
+        <h3 class="font-weight-bold mb-0">Hello, Noah</h3>
+      </div>
 
       @yield('content')
 

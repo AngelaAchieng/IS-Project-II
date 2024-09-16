@@ -19,9 +19,4 @@ class Organization extends Model
     public function projects(){
         return $this->hasMany(Project::class);
     }
-
-    //(organization has many requirements)
-    public function requirements(){
-        return $this->hasMany(Requirement::class);
-    }
 }

@@ -20,13 +20,13 @@ class CreateProjectsTable extends Migration
             $table->string('Project_proposal');
             $table->date('StartDate');
             $table->date('EndDate');
-            $table->string('EstimatedDuration');
-            $table->unsignedInteger('organization_id');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('organization_id');
             $table->timestamps();
 
-            $table->foreign('organization_id')->references('Organization_id')->on('organizations');
             $table->foreign('user_id')->references('User_id')->on('users');
+            $table->foreign('organization_id')->references('Organization_id')->on('organizations');
+
         });
     }
 
