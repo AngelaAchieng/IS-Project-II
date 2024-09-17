@@ -25,6 +25,13 @@ class UserController extends Controller
 
     //Save user
     public function save(Request $request){
+
+        $this->validate($request, [
+            'users_names'=> 'min:5',
+            'email' => 'email',
+            'Role_id' => 'required'
+        ]);
+
         $user_usersname = $request->get('users_names');
         $user_email = $request->get('email');
         $user_password = Hash::make($request->get('password'));
@@ -55,6 +62,13 @@ class UserController extends Controller
 
     //Update made
     public function update($User_id, Request $request){
+
+        $this->validate($request, [
+            'users_names'=> 'min:5',
+            'email' => 'email',
+            'Role_id' => 'required'
+        ]);
+        
         $user_usersname = $request->get('users_names');
         $user_email = $request->get('email');
         $user_password = Hash::make($request->get('password'));

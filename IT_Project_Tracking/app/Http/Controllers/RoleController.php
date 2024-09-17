@@ -22,9 +22,11 @@ class RoleController extends Controller
 
     //Save role
     public function save(Request $request){
+        
         $request->validate([
-            'role_name' => 'required|min:2 '
+            'role_name' => 'required|min:3 '
         ]);
+        
         $role_name = $request->get('role_name');
 
         $role = new Role();
@@ -50,7 +52,7 @@ class RoleController extends Controller
     public function update($Role_id, Request $request){
 
         $request->validate([
-            'role_name' => 'required|min:2 '
+            'role_name' => 'required|min:3 '
         ]);
         
         $role_name = $request->get('role_name');

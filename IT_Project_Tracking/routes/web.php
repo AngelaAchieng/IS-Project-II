@@ -22,9 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layout');
-});
+Route::get('/',[UserController::class,'login']);
 
 Route::get('admin', function () {
     return view('admindashboard');
@@ -49,7 +47,6 @@ Route::post('user/save',[UserController::class,'save']);
 Route::post('user/update/{User_id}',[UserController::class,'update']);
 Route::get('user/edit/{User_id}',[UserController::class,'edit']);
 Route::get('user/delete/{User_id}',[UserController::class,'delete']);
-Route::get('login',[UserController::class,'login']);
 
 //organizations routes
 Route::get('organizations',[OrganizationController::class,'all']);

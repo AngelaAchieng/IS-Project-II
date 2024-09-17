@@ -25,6 +25,12 @@ class MilestoneController extends Controller
 
     //Save a milestone
     public function save(Request $request){
+
+        $this->validate($request, [
+            'description'=> 'min:5',
+            'Project_id' => 'required'
+        ]);
+
         $milestone_description = $request->get('description');
         $milestone_duration = $request->get('duration');
         $milestone_date = $request->get('date');
@@ -55,6 +61,12 @@ class MilestoneController extends Controller
 
     //Update made
     public function update($Milestone_id, Request $request){
+
+        $this->validate($request, [
+            'description'=> 'min:5',
+            'Project_id' => 'required'
+        ]);
+        
         $milestone_description = $request->get('description');
         $milestone_duration = $request->get('duration');
         $milestone_date = $request->get('date');

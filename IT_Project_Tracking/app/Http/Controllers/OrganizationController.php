@@ -23,6 +23,12 @@ class OrganizationController extends Controller
 
     //Save an organization
     public function save(Request $request){
+
+        $this->validate($request, [
+            'organization_name'=> 'min:2',
+            'organization_description' => 'min:5'
+        ]);
+
         $organization_name = $request->get('organization_name');
         $organization_description = $request->get('organization_description');
 
@@ -48,6 +54,12 @@ class OrganizationController extends Controller
 
     //Update made
     public function update($Organization_id, Request $request){
+
+        $this->validate($request, [
+            'organization_name'=> 'min:2',
+            'organization_description' => 'min:5'
+        ]);
+        
         $organization_name = $request->get('organization_name');
         $organization_description = $request->get('organization_description');
         $organization = Organization::find($Organization_id);

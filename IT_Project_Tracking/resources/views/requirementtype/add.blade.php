@@ -11,6 +11,15 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
+                @if ($errors->any())
+                        <div class ="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <h6 class="text-white">{{$error}}</h6>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="form-group">
                         <label>Requirement Type Name</label>
                         <input type='text' required name="requirementtype_name" class="form-control" placeholder="Enter Name">

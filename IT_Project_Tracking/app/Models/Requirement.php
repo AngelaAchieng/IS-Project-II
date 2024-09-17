@@ -16,7 +16,7 @@ class Requirement extends Model
     public $timestamps = false;
 
     //relationships (Requirement(server) belongs to a requirementtype)
-    public function requiremnttypes(){
+    public function requirementtypes(){
         return $this->belongsTo(RequirementType::class,'requirementtype_id','RequirementType_id');
     }
 

@@ -27,6 +27,14 @@ class RequirementController extends Controller
 
     //Save a requirement
     public function save(Request $request){
+
+        $this->validate($request, [
+            'requirement_name'=> 'min:3',
+            'requirement_description' => 'min:5',
+            'RequirementType_id' => 'required',
+            'Project_id' => 'required'
+        ]);
+
         $requirement_name = $request->get('requirement_name');
         $requirement_description = $request->get('requirement_description');
         $requirement_quantity = $request->get('requirement_quantity');
@@ -54,7 +62,7 @@ class RequirementController extends Controller
         $requirement = Requirement::find($Requirement_id);
 
         if($requirement){
-            return view('requirement.edit',['requirementtypes'=>$requirementtypes],['projects'=>$projects],['requirement'=>$requirement]);
+            return view('requirement.edit',['requirementtypes'=>$requirementtypes,'projects'=>$projects,'requirement'=>$requirement]);
         }else{
             return redirect('requirements');
         }
@@ -62,6 +70,14 @@ class RequirementController extends Controller
 
     //Save changes made
     public function update($Requirement_id, Request $request){
+
+        $this->validate($request, [
+            'requirement_name'=> 'min:3',
+            'requirement_description' => 'min:5',
+            'RequirementType_id' => 'required',
+            'Project_id' => 'required'
+        ]);
+
         $requirement_name = $request->get('requirement_name');
         $requirement_description = $request->get('requirement_description');
         $requirement_quantity = $request->get('requirement_quantity');

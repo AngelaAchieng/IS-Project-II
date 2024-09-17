@@ -22,6 +22,11 @@ class RequirementtypeController extends Controller
 
     //Save a requirementtype
     public function save(Request $request){
+        
+        $this->validate($request, [
+            'requirementtype_name'=> 'min:3'
+        ]);
+        
         $requirementtype_name = $request->get('requirementtype_name');
 
         $requirementtype = new Requirementtype();
@@ -46,6 +51,10 @@ class RequirementtypeController extends Controller
     //Update made
     public function update($RequirementType_id, Request $request){
         
+        $this->validate($request, [
+            'requirementtype_name'=> 'min:3'
+        ]);
+
         $requirementtype_name = $request->get('requirementtype_name');
         $requirementtype = RequirementType::find($RequirementType_id);
         

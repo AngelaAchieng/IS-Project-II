@@ -26,6 +26,14 @@ class ProjectController extends Controller
 
     //Save a project
     public function save(Request $request){
+
+        $this->validate($request, [
+            'project_name'=> 'min:4',
+            'project_description' => 'min:5',
+            'User_id' => 'required',
+            'Organization_id' => 'required'
+        ]);
+
         $project_name = $request->get('project_name');
         $project_description = $request->get('project_description');
         $project_proposal = $request->get('project_proposal');
@@ -56,7 +64,7 @@ class ProjectController extends Controller
         $project = Project::find($Project_id);
 
         if($project){
-            return view('project.edit',['users'=>$users],['organizations'=>$organizations],['project'=>$project]);
+            return view('project.edit',['users'=>$users,'organizations'=>$organizations,'project'=>$project]);
         }else{
             return redirect('projects');
         }
@@ -64,6 +72,14 @@ class ProjectController extends Controller
 
     //Save changes made
     public function update($Project_id, Request $request){
+
+        $this->validate($request, [
+            'project_name'=> 'min:4',
+            'project_description' => 'min:5',
+            'User_id' => 'required',
+            'Organization_id' => 'required'
+        ]);
+        
         $project_name = $request->get('project_name');
         $project_description = $request->get('project_description');
         $project_proposal = $request->get('project_proposal');

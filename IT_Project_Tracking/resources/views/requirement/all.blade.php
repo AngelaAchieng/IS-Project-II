@@ -39,8 +39,8 @@
                                 <td>{{$requirement->Requirement_description}}</td>
                                 <td>{{$requirement->Requirement_quantity}}</td>
                                 <td>{{$requirement->UnitPrice}}</td>
-                                <td>{{$requirement->requirementtype->RequirementType_Name ?? 'Null'}}</td>
-                                <td>{{$requirement->project->Project_name ?? 'Null'}}</td>
+                                <td>{{$requirement->requirementtypes->RequirementType_Name}}</td>
+                                <td>{{$requirement->projects->Project_name}}</td>
                                 <td class="align-middle text-center text-sm">
                                     <a href="{{URL::to('requirement/edit/'.$requirement->Requirement_id)}}">
                                         <i class="fa-solid fa-pen-to-square"></i>

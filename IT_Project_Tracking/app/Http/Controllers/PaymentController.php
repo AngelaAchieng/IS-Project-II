@@ -24,6 +24,11 @@ class PaymentController extends Controller
 
     //Save a payment
     public function save(Request $request){
+
+        $this->validate($request, [
+            'Project_id'=> 'required'
+        ]);
+
         $payment_amount = $request->get('project_amount');
         $payment_projectid = $request->get('Project_id');
 
@@ -49,6 +54,11 @@ class PaymentController extends Controller
 
     //Update made
     public function update($Payment_id, Request $request){
+
+        $this->validate($request, [
+            'Project_id'=> 'required'
+        ]);
+        
         $payment_amount = $request->get('project_amount');
         $payment_projectid = $request->get('Project_id');
         $payment = Payment::find($Payment_id);
