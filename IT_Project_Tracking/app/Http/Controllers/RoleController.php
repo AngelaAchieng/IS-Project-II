@@ -10,7 +10,7 @@ class RoleController extends Controller
     //Display all roles
     public function all(){
 
-        $allRoles = Role::all();
+        $allRoles = Role::paginate(8);
 
         return view('role.all',['roles' => $allRoles]);
     }

@@ -46,6 +46,8 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <div class="pagn-links">
+                    {{$roles->links()}}
                 </div>
             </div>
         </div>
