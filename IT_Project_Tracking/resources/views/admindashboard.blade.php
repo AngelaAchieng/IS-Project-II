@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('admin')
 
 @section('headTitle','Admin Dashboard')
 @section('pageTitle','Admin Dashboard - ')

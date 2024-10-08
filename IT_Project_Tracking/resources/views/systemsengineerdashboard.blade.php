@@ -1,7 +1,7 @@
-@extends('layout')
+@extends('engineer')
 
-@section('headTitle','Engineer Dashboard - ')
-@section('pageTitle','Engineer Dashboard')
+@section('headTitle','Systems Engineer Dashboard')
+@section('pageTitle','Systems Engineer Dashboard - ')
 
 @section('content')
 

@@ -121,8 +121,14 @@ class UserController extends Controller
                 $role_name = $user->role->Role_name;
                 if($role_name == "Admin"){
                     return redirect('admin');
+                }else if($role_name == "Systems Admin"){
+                    return redirect('systemsadmin');
+                }else if($role_name == "Technical Admin"){
+                    return redirect('technicaladmin');
+                }else if($role_name == "Systems Engineer"){
+                    return redirect('systemsengineer');
                 }else{
-                    return redirect('engineer');
+                    return redirect('technicalengineer');
                 }
 
             }else{
