@@ -1,7 +1,7 @@
 @extends('layout')
 
-@section('headTitle','Add Project - ')
-@section('pageTitle','Add Project')
+@section('headTitle','Add Project')
+@section('pageTitle','Add Project - ')
 
 @section('content')
 

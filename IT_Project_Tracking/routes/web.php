@@ -22,8 +22,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[UserController::class,'login']);
-
 Route::get('admin', function () {
     return view('admindashboard');
 });
@@ -41,6 +39,9 @@ Route::get('role/edit/{Role_id}',[RoleController::class,'edit']);
 Route::get('role/delete/{Role_name}',[RoleController::class,'delete']);
 
 //users routes
+Route::get('/',[UserController::class,'login']);
+Route::get('Profile',[UserController::class,'profile']);
+Route::post('authLogin',[UserController::class,'authLogin']);
 Route::get('users',[UserController::class,'all']);
 Route::get('user/add',[UserController::class,'add']);
 Route::post('user/save',[UserController::class,'save']);

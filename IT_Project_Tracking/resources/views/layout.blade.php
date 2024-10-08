@@ -34,7 +34,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="{{URL::to('css/material-dashboard.css?v=3.1.0')}}" rel="stylesheet" />
-  <link id="stylesheet" href="{{URL::to('css/app.css')}}" rel="stylesheet" />
+  <link rel="stylesheet" href="{{URL::to('css/app.css')}}">
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -52,7 +52,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('/')) ? 'active': ''}}" href="{{URL::to('/')}}">
+          <a class="nav-link text-white {{(request() ->is('admin')) ? 'active': ''}}" href="{{URL::to('admin')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
              <i class="nav-icon fa-solid fa-window-maximize"></i>
             </div>
@@ -126,17 +126,6 @@
             <span class="nav-link-text ms-1">Billing</span>
           </a>
         </li>
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="#">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">person</i>
-            </div>
-            <span class="nav-link-text ms-1">Profile</span>
-          </a>
-        </li>
       </ul>
     </div>
   </aside>
@@ -147,9 +136,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">@yield('pageTitle')</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">@yield('headTitle')</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">@yield('pageTitle')</h6>
+          <h6 class="font-weight-bolder mb-0">@yield('headTitle')</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -197,10 +186,36 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item d-flex align-items-center">
-              <a href="../pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
+            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-user me-sm-1"></i>
               </a>
+              <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                <li class="mb-2">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <i class="fa-solid fa-address-card"></i>
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1 px-2">
+                          <a href="{{URL::to('Profile')}}">
+                          <span class="font-weight-bold">Profile</span> 
+                        </h6>
+                      </div>
+                    </div>
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1 px-2">
+                          <a href="{{URL::to('/')}}">
+                          <span class="font-weight-bold">Sign Out</span> 
+                        </h6>
+                      </div>
+                    </div>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>
@@ -208,9 +223,6 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
-      <div class="mb-md-0 mb-3">
-        <h3 class="font-weight-bold mb-0">Hello, Noah</h3>
-      </div>
 
       @yield('content')
 
@@ -262,7 +274,7 @@
         <div>
           <h6 class="mb-0">Sidebar Colors</h6>
         </div>
-        <a href="{{URL::to('javascript:void(0)')}}" class="switch-trigger background-color">
+        <a href="javascript:void(0)" class="switch-trigger background-color">
           <div class="badge-colors my-2 text-start">
             <span class="badge filter bg-gradient-primary" data-color="primary" onclick="sidebarColor(this)"></span>
             <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
@@ -541,6 +553,7 @@
       },
     });
   </script>
+
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -550,6 +563,7 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{URL::to('js/material-dashboard.min.js?v=3.1.0')}}"></script>
   <script src="{{URL::to('js/app.js')}}"></script>

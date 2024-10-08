@@ -1,7 +1,7 @@
 @extends('layout')
 
-@section('headTitle','Roles - ')
-@section('pageTitle','Roles')
+@section('headTitle','Roles')
+@section('pageTitle','Roles - ')
 
 @section('content')
 
@@ -17,12 +17,12 @@
 
             <div class="card-body px-0 pt-0 pb-1">
                 <div class="table-responsive p-0">
-                    <table class="table align-items-center mb-0" style="width:80%">
+                    <table class="table align-items-center mb-0">
                         <thead>
                             <tr>
-                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" style="width:40%">#</th>
-                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" style="width:40%">Name</th>
-                                <th class="align-middle text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7"style="width:40%">Actions</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >#</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Name</th>
+                                <th class="align-middle text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Actions</th>
                             </tr>
                         </thead>
                         <tbody>

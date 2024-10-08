@@ -1,7 +1,7 @@
 @extends('layout')
 
-@section('headTitle','Edit Milestone - ')
-@section('pageTitle','Edit Milestone')
+@section('headTitle','Edit Milestone')
+@section('pageTitle','Edit Milestone - ')
 
 @section('content')
 

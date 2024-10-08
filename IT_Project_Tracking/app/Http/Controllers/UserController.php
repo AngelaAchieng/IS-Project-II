@@ -106,4 +106,39 @@ class UserController extends Controller
     public function login(){
         return view('user.login');  
     }
+
+    public function authLogin(Request $request){
+        $user_email = $request->get('email');
+        $user_password = $request->get('password');
+
+        $user = User::with('role')->where('email',$user_email)->first();
+
+        if($user){
+        
+            //check password
+            if(Hash::check($user_password,$user->Password)){
+            
+                $role_name = $user->role->Role_name;
+                if($role_name == "Admin"){
+                    return redirect('admin');
+                }else{
+                    return redirect('engineer');
+                }
+
+            }else{
+            //invalid password
+                return back()->with('fail', 'This password is not registered.');
+            }
+        
+        }else{
+        //user not found
+            return back()->with('fail', 'This email is not registered.');
+        
+        }
+    }
+    
+    //User profile
+    public function profile(){
+        return view('user.profile');  
+    }
 }

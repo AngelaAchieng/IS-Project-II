@@ -1,7 +1,7 @@
 @extends('layout')
 
-@section('headTitle','Edit Role - ')
-@section('pageTitle','Edit Role')
+@section('headTitle','Edit Role')
+@section('pageTitle','Edit Role - ')
 
 @section('content')
 

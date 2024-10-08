@@ -1,7 +1,7 @@
 @extends('layout')
 
-@section('headTitle','Add Payment - ')
-@section('pageTitle','Add Payment')
+@section('headTitle','Add Payment')
+@section('pageTitle','Add Payment - ')
 
 @section('content')
 

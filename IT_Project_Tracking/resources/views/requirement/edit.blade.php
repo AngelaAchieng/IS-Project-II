@@ -1,7 +1,7 @@
 @extends('layout')
 
-@section('headTitle','Edit Requirement - ')
-@section('pageTitle','Edit Requirement')
+@section('headTitle','Edit Requirement')
+@section('pageTitle','Edit Requirement - ')
 
 @section('content')
 

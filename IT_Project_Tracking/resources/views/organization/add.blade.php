@@ -1,7 +1,7 @@
 @extends('layout')
 
-@section('headTitle','Add Organization - ')
-@section('pageTitle','Add Organization')
+@section('headTitle','Add Organization')
+@section('pageTitle','Add Organization - ')
 
 @section('content')
 

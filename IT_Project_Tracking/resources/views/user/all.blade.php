@@ -1,7 +1,7 @@
 @extends('layout')
 
-@section('headTitle','Users - ')
-@section('pageTitle','Users')
+@section('headTitle','Users')
+@section('pageTitle','Users - ')
 
 @section('content')
 
@@ -59,13 +59,10 @@
 @endsection
 
 @section('scripts')
-@if(session('status'))
-        <script type="text/javascript">
-            iziToast.show({
-                icon: 'fa-solid fa-circle-check',
-                message: "{{session('status')}}",
-                position: 'topRight'
-            });
-        </script>
-    @endif
+<script type="text/javascript">
+    iziToast.show({
+    title: 'Hey',
+    message: 'What would you like to add?'
+    });
+</script>
 @endsection

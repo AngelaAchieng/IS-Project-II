@@ -23,8 +23,8 @@ class RoleController extends Controller
     //Save role
     public function save(Request $request){
         
-        $request->validate([
-            'role_name' => 'required|min:3 '
+        $this->validate($request, [
+            'role_name' => 'min:3 '
         ]);
         
         $role_name = $request->get('role_name');
@@ -51,8 +51,8 @@ class RoleController extends Controller
     //Update changes made
     public function update($Role_id, Request $request){
 
-        $request->validate([
-            'role_name' => 'required|min:3 '
+        $this->validate($request, [
+            'role_name' => 'min:3 '
         ]);
         
         $role_name = $request->get('role_name');
