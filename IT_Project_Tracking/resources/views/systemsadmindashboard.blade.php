@@ -1,4 +1,4 @@
-@extends('admin')
+@extends('systemsadmin')
 
 @section('headTitle','Systems Admin Dashboard')
 @section('pageTitle','Systems Admin Dashboard - ')

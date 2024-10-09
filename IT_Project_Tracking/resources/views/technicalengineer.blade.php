@@ -52,7 +52,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('admin')) ? 'active': ''}}" href="{{URL::to('admin')}}">
+          <a class="nav-link text-white {{(request() ->is('technicalengineer')) ? 'active': ''}}" href="{{URL::to('technicalengineer')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
              <i class="nav-icon fa-solid fa-window-maximize"></i>
             </div>
@@ -61,22 +61,6 @@
         </li>
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Manage</h6>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('role*')) ? 'active': ''}}" href="{{URL::to('roles')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fa-solid fa-user-gear"></i>
-            </div>
-            <span class="nav-link-text ms-1">Roles</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('user*')) ? 'active': ''}}" href="{{URL::to('users')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fas fa-users"></i>
-            </div>
-            <span class="nav-link-text ms-1">Users</span>
-          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white {{(request() ->is('organization*')) ? 'active': ''}}" href="{{URL::to('organizations')}}">
@@ -116,14 +100,6 @@
              <i class="fa-solid fa-diagram-project"></i>
             </div>
             <span class="nav-link-text ms-1">Milestones</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('payment*')) ? 'active': ''}}" href="{{URL::to('payments')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">receipt_long</i>
-            </div>
-            <span class="nav-link-text ms-1">Billing</span>
           </a>
         </li>
       </ul>
@@ -317,6 +293,7 @@
 
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{URL::to('js/material-dashboard.min.js?v=3.1.0')}}"></script>
+  <script src="{{URL::to('js/app.js')}}"></script>
   @yield('scripts')
 </body>
 

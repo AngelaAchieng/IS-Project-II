@@ -78,8 +78,8 @@
                       </div>
                       <div class="form-check form-switch">
 
-                      <div class="text-center">
-                        <button type="submit" class="btn bg-gradient-dark w-100 mt-4 mb-0">SIGN IN</button>
+                      <div class="center text-center ">
+                        <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">SIGN IN</button>
                       </div>
                     </form>
                   </div>
@@ -104,9 +104,6 @@
               <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                 <li class="nav-item">
                   <a href="https://www.next.co.ke/" class="nav-link text-white" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-white" target="_blank">License</a>
                 </li>
               </ul>
             </div>
