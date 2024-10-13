@@ -81,7 +81,7 @@
         <li class="nav-item">
           <a class="nav-link text-white {{(request() ->is('organization*')) ? 'active': ''}}" href="{{URL::to('organizations')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fa-solid fa-sitemap"></i>
+              <i class="fa-solid fa-building"></i>
             </div>
             <span class="nav-link-text ms-1">Organizations</span>
           </a>
@@ -97,7 +97,7 @@
         <li class="nav-item">
           <a class="nav-link text-white {{(request() ->is('requirementtype*')) ? 'active': ''}}" href="{{URL::to('requirementtypes')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fa-solid fa-diagram-project"></i>
+              <i class="fa-solid fa-rectangle-list"></i>
             </div>
             <span class="nav-link-text ms-1">Requirement Types</span>
           </a>
@@ -105,7 +105,7 @@
         <li class="nav-item">
           <a class="nav-link text-white {{(request() ->is('requirements*')) ? 'active': ''}}" href="{{URL::to('requirements')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fa-solid fa-diagram-project"></i>
+              <i class="fa-solid fa-clipboard-list"></i>
             </div>
             <span class="nav-link-text ms-1">Requirements</span>
           </a>
@@ -113,7 +113,7 @@
         <li class="nav-item">
           <a class="nav-link text-white {{(request() ->is('milestone*')) ? 'active': ''}}" href="{{URL::to('milestones')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fa-solid fa-diagram-project"></i>
+              <i class="fa-solid fa-list-check"></i>
             </div>
             <span class="nav-link-text ms-1">Milestones</span>
           </a>
@@ -224,7 +224,9 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
+      
       @yield('content')
+
       <footer class="footer py-4  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
@@ -317,6 +319,7 @@
 
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{URL::to('js/material-dashboard.min.js?v=3.1.0')}}"></script>
+  
   @yield('scripts')
 </body>
 

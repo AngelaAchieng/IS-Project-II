@@ -79,7 +79,7 @@
                       <div class="form-check form-switch">
 
                       <div class="center text-center ">
-                        <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">SIGN IN</button>
+                        <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2 pd-5">SIGN IN</button>
                       </div>
                     </form>
                   </div>

@@ -13,16 +13,21 @@
                 <i class="fas fa-plus"></i> Add Requirement Type
             </a>
         </div>
-        <div class="card mb-4 text-center" style="width: 50rem;">
+        <div class="card mb-4" style="width: 50rem;">
+            <div class="card-header p-0 position-relative mt-n2 mx-3 z-index-2">
+              <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
+                <h6 class="text-white text-capitalize ps-3">Requirement Types table</h6>
+              </div>
+            </div>
 
-            <div class="card-body px-0 pt-0 pb-1">
+            <div class="card-body px-0 pt-0 pb-1 text-center">
                 <div class="table-responsive p-0">
 
                     <table class="table align-items-center mb-0" style="width:80%">
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >#</th>
-                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Requirement Type Name</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Name</th>
                                 <th class="align-middle text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Actions</th>
                             </tr>
                         </thead>
