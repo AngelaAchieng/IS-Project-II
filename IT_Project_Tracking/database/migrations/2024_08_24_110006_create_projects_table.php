@@ -20,6 +20,7 @@ class CreateProjectsTable extends Migration
             $table->string('Project_proposal');
             $table->date('StartDate');
             $table->date('EndDate');
+            $table->string('Status', 10);
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('organization_id');
             $table->timestamps();

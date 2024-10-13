@@ -29,18 +29,21 @@ class UserController extends Controller
         $this->validate($request, [
             'users_names'=> 'min:5',
             'email' => 'email',
+            'phone_number' => 'max:13',
             'Role_id' => 'required'
         ]);
 
         $user_usersname = $request->get('users_names');
         $user_email = $request->get('email');
         $user_password = Hash::make($request->get('password'));
+        $user_phonenumber = $request->get('phone_number');
         $user_roleid = $request->get('Role_id');
 
         $user = new User();
         $user->UserName =$user_usersname;
         $user->Email =$user_email;
         $user->Password =$user_password;
+        $user->PhoneNumber =$user_phonenumber;
         $user->role_id =$user_roleid;
         $user->save();
 
@@ -66,12 +69,14 @@ class UserController extends Controller
         $this->validate($request, [
             'users_names'=> 'min:5',
             'email' => 'email',
+            'phone_number' => 'phone_number',
             'Role_id' => 'required'
         ]);
         
         $user_usersname = $request->get('users_names');
         $user_email = $request->get('email');
         $user_password = Hash::make($request->get('password'));
+        $user_phonenumber = $request->get('phone_number');
         $user_roleid = $request->get('Role_id');
 
         $user = User::find($User_id);
@@ -80,6 +85,7 @@ class UserController extends Controller
             $user->UserName =$user_usersname;
             $user->Email =$user_email;
             $user->Password =$user_password;
+            $user->PhoneNumber =$user_phonenumber;
             $user->role_id =$user_roleid;
             $user->save();
     

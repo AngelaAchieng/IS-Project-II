@@ -30,6 +30,7 @@ class ProjectController extends Controller
         $this->validate($request, [
             'project_name'=> 'min:4',
             'project_description' => 'min:5',
+            'status' => 'required',
             'User_id' => 'required',
             'Organization_id' => 'required'
         ]);
@@ -39,6 +40,7 @@ class ProjectController extends Controller
         $project_proposal = $request->get('project_proposal');
         $project_startdate = $request->get('start_date');
         $project_enddate = $request->get('end_date');
+        $project_status = $request->get('status');
         $project_userid = $request->get('User_id');
         $project_organizationid = $request->get('Organization_id');
 
@@ -49,6 +51,7 @@ class ProjectController extends Controller
         $project->Project_proposal =$project_proposal;
         $project->StartDate =$project_startdate;
         $project->EndDate =$project_enddate;
+        $project->Status =$project_status;
         $project->user_id =$project_userid;
         $project->organization_id =$project_organizationid;
         $project->save();
@@ -76,6 +79,7 @@ class ProjectController extends Controller
         $this->validate($request, [
             'project_name'=> 'min:4',
             'project_description' => 'min:5',
+            'status' => 'required',
             'User_id' => 'required',
             'Organization_id' => 'required'
         ]);
@@ -85,6 +89,7 @@ class ProjectController extends Controller
         $project_proposal = $request->get('project_proposal');
         $project_startdate = $request->get('start_date');
         $project_enddate = $request->get('end_date');
+        $project_status = $request->get('status');
         $project_userid = $request->get('User_id');
         $project_organizationid = $request->get('Organization_id');
 
@@ -96,6 +101,7 @@ class ProjectController extends Controller
             $project->Project_proposal =$project_proposal;
             $project->StartDate =$project_startdate;
             $project->EndDate =$project_enddate;
+            $project->Status =$project_status;
             $project->user_id =$project_userid;
             $project->organization_id =$project_organizationid;
             $project->save();

@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('UserName', 15);
             $table->string('Email', 150);
             $table->string('Password');
+            $table->string('PhoneNumber',18);
             $table->unsignedInteger('role_id');
             $table->timestamps();
 

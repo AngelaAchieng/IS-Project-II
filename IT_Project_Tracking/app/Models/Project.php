@@ -12,7 +12,7 @@ class Project extends Model
     //properties
     protected $table = "projects";
     protected $primaryKey = "Project_id";
-    protected $fillable = ['Project_name', 'Project_description', 'Project_proposal', 'StartDate', 'EndDate', 'user_id', 'organization_id'];
+    protected $fillable = ['Project_name', 'Project_description', 'Project_proposal', 'StartDate', 'EndDate', 'Status', 'user_id', 'organization_id'];
 
     //relationships (projects belongs to organizations)
     public function organization(){

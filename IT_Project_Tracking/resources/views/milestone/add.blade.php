@@ -26,12 +26,12 @@
                             </ul>
                         </div>
                     @endif
-                    <label class="mt-4">Milestone Description</label>
+                    <label class="mt-3">Milestone Description</label>
                     <div class="input-group input-group-outline mb-4">
                         <label class="form-label">Enter Description</label>
                         <input type='text' required name="description" class="form-control">
                     </div>
-                    <label>Milestone duration</label>
+                    <label>Milestone Duration</label>
                     <div class="input-group input-group-outline mb-4">
                         <label class="form-label">Enter Duration</label>
                         <input type='text' required name="duration" class="form-control">
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-end mt-4">
-                        <button type="submit" class="btn bg-gradient-dark m-0 ms-2">Create Requirement</button>
+                        <button type="submit" class="btn bg-gradient-dark m-0 ms-2">Create Milestone</button>
                     </div>
                 </div>
             </div>

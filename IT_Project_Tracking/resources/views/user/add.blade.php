@@ -40,16 +40,11 @@
                         <label class="form-label">Enter Password</label>
                         <input type='password' pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}' title='Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters' required name="password" class="form-control">
                     </div>
-                    <label>Confirm Password</label>
-                    <div class="input-group input-group-outline mb-4">
-                        <label class="form-label">Enter CPassword</label>
-                        <input type='cpassword' pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}' title='Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters' required name="password" class="form-control">
-                    </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="input-group input-group-static">
                                 <label>Phone Number</label>
-                                <input type='string' pattern='^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$' required name="phone_number" class="form-control">
+                                <input type='string' pattern='^(\+\d\s?)?\(?\d\)?[\s.-]?\d[\s.-]?\d$' required name="phone_number" class="form-control">
                             </div>
                         </div>
                         <div class="col-6">

@@ -7,7 +7,7 @@
 
 <form id="add-project-form" method="post" action="{{URL::to('project/save')}}">
     @csrf
-    <div class="row mt-4">
+    <div class="row mt-1">
         <div class="col-lg-9 col-12 mx-auto position-relative">
             <div class="card">
                 <div class="card-header p-3 pt-2">
@@ -41,19 +41,26 @@
                         <input type='string' required name="project_proposal" class="form-control">
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-6 mb-2">
                             <div class="input-group input-group-static">
                                 <label>Start Date</label>
                                 <input type='date' required name="start_date" class="form-control">
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 mb-2">
                             <div class="input-group input-group-static">
                                 <label>End Date</label>
                                 <input type='date' required name="end_date" class="form-control">
                             </div>
                         </div>
-                        <div class="col-6 mt-4">
+                    </div>
+                        <label >Status</label>
+                        <div class="input-group input-group-outline mb-3">
+                            <label class="form-label">Enter Status</label>
+                            <input type='string' required name="status" class="form-control">
+                        </div>
+                    <div class="row">
+                        <div class="col-6 mt-1">
                             <label>User</label>
                             <select name="User_id" id="User_id" class="form-control">
                                 <option value="">Please select User</option>
@@ -62,7 +69,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-6 mt-4">
+                        <div class="col-6 mt-1">
                             <label>Organization</label>
                             <select name="Organization_id" id="Organization_id" class="form-control">
                                 <option value="">Please select Organization</option>

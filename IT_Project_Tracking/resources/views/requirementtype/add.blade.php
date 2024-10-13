@@ -26,7 +26,7 @@
                             </ul>
                         </div>
                     @endif
-                    <label class="mt-4">Requirement Type Name</label>
+                    <label class="mt-3">Requirement Type Name</label>
                     <div class="input-group input-group-outline mb-4">
                         <label class="form-label">Enter Name</label>
                         <input type='text' required name="requirementtype_name" class="form-control">

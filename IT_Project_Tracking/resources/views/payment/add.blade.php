@@ -26,9 +26,9 @@
                             </ul>
                         </div>
                     @endif
-                    <label class="mt-4">Project Amount</label>
+                    <label class="mt-3">Project Amount</label>
                     <div class="input-group input-group-outline mb-4">
-                        <label class="form-label">Enter Ammount</label>
+                        <label class="form-label">Enter Amount</label>
                         <input type='integer' required name="project_amount" class="form-control">
                     </div>
                     <label>Project</label>

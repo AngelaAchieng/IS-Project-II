@@ -28,6 +28,7 @@
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >#</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Users Names</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Email</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Phone Number</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Role Name</th>
                                 <th class="align-middle text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Actions</th>
                             </tr>
@@ -38,6 +39,7 @@
                                 <td>{{$user->User_id}}</td>
                                 <td>{{$user->UserName}}</td>
                                 <td>{{$user->Email}}</td>
+                                <td>{{$user->PhoneNumber}}</td>
                                 <td>{{$user->role->Role_name}}</td>
                                 <td class="align-middle text-center text-sm">
                                     <a href="{{URL::to('user/edit/'.$user->User_id)}}">
@@ -50,7 +52,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5">No record</td>
+                                <td colspan="6">No record</td>
                             </tr>
                             @endforelse
                         </tbody>

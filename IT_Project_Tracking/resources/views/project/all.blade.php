@@ -31,6 +31,7 @@
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Project Proposal</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Start Date</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >End Date</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Status</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Engineer Name</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Organization Name</th>
                                 <th class="align-middle text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Actions</th>
@@ -45,6 +46,7 @@
                                 <td>{{$project->Project_proposal}}</td>
                                 <td>{{$project->StartDate}}</td>
                                 <td>{{$project->EndDate}}</td>
+                                <td>{{$project->Status}}</td>
                                 <td>{{$project->user->UserName}}</td>
                                 <td>{{$project->organization->Organization_name}}</td>
                                 <td class="align-middle text-center text-sm">
@@ -58,7 +60,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="9">No record</td>
+                                <td colspan="10">No record</td>
                             </tr>
                             @endforelse
                         </tbody>
