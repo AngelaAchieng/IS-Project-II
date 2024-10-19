@@ -12,7 +12,7 @@ class Milestone extends Model
     //properties
     protected $table = "milestones";
     protected $primaryKey = "Milestone_id";
-    protected $fillable = ['Milestone_description', 'Milestone_duration', 'Start_Date', 'End_Date' ,'project_id'];
+    protected $fillable = ['Milestone_description', 'Milestone_duration', 'Start_Date', 'End_Date', 'Status' ,'project_id'];
 
     //relationships (a milestone belongs to a project)
     public function project(){

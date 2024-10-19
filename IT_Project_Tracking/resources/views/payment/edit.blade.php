@@ -37,6 +37,12 @@
                                 <option value="{{$project->Project_id}}">{{$project->Project_name}}</option>
                             @endforeach
                         </select>
+                    <div class="col-6 mb-2">
+                        <div class="input-group input-group-static">
+                            <label>Date</label>
+                            <input type='date' required name="bdate" class="form-control">
+                        </div>
+                    </div>
                     <div class="d-flex justify-content-end mt-4">
                         <button type="submit" class="btn bg-gradient-dark m-0 ms-2">Update Payment</button>
                     </div>

@@ -4,17 +4,45 @@
 @section('pageTitle','Admin Dashboard - ')
 
 @section('content')
-<div class="container-fluid py-4">
+    <div class="container-fluid py-4">
       <div class="row">
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
             <div class="card-header p-3 pt-2">
               <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">weekend</i>
+                <i class="material-icons opacity-10">money</i>
               </div>
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Today's Money</p>
-                <h4 class="mb-0">$53k</h4>
+                <p class="text-sm mb-0 text-capitalize">Weekly Money</p>
+                @php
+                  $Project_amount = DB::table('payments')->pluck('Project_amount')->toArray();  // Fetch project amounts as an array
+                  $paymentsum = array_sum($Project_amount);  // Sum the project amounts
+                @endphp
+
+                <h4 class="mb-0">KES {{ $paymentsum }}</h4>
+
+              </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last week</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">money</i>
+              </div>
+              <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize">Today's Expenses</p>
+                @php
+                  $UnitPrice = DB::table('requirements')->pluck('UnitPrice')->toArray();  //Fetch unit price as an array
+                  $requirementsum = array_sum($UnitPrice);  //Sum the unit price
+                @endphp
+
+                <h4 class="mb-0">KES {{ $requirementsum }}</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -27,11 +55,16 @@
           <div class="card">
             <div class="card-header p-3 pt-2">
               <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">person</i>
+                <i class="material-icons opacity-10">event</i>
               </div>
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">New Clients</p>
-                <h4 class="mb-0">3,462</h4>
+                <p class="text-sm mb-0 text-capitalize">Monthly Projects</p>
+                @php
+                  $Project_id = DB::table('projects')->pluck('Project_id')->toArray();  //Fetch project IDs as an array
+                  $projectcount = count($Project_id);  //Count the project IDs
+                @endphp
+
+                <h4 class="mb-0">{{ $projectcount }}</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -41,22 +74,6 @@
           </div>
         </div>
         <div class="col-xl-3 col-sm-6">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">weekend</i>
-              </div>
-              <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Sales</p>
-                <h4 class="mb-0">$103,430</h4>
-              </div>
-            </div>
-            <hr class="dark horizontal my-0">
-            <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+5% </span>than yesterday</p>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="row mt-4">
         <div class="col-lg-4 col-md-6 mt-4 mb-4">
@@ -69,12 +86,12 @@
               </div>
             </div>
             <div class="card-body">
-              <h6 class="mb-0 ">Website Views</h6>
-              <p class="text-sm ">Last Campaign Performance</p>
+              <h6 class="mb-0 ">Completed Projects</h6>
+              <p class="text-sm ">Yearly projects</p>
               <hr class="dark horizontal">
               <div class="d-flex ">
                 <i class="material-icons text-sm my-auto me-1">schedule</i>
-                <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
+                <p class="mb-0 text-sm"> updated 2 days ago </p>
               </div>
             </div>
           </div>
@@ -89,8 +106,8 @@
               </div>
             </div>
             <div class="card-body">
-              <h6 class="mb-0 "> Daily Sales </h6>
-              <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today sales. </p>
+              <h6 class="mb-0 "> Pending Projects</h6>
+              <p class="text-sm "> Yearly Projects </p>
               <hr class="dark horizontal">
               <div class="d-flex ">
                 <i class="material-icons text-sm my-auto me-1">schedule</i>
@@ -133,10 +150,10 @@
                 <table class="table align-items-center justify-content-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Project</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Budget</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Completion</th>
+                      <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Project</th>
+                      <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Budget</th>
+                      <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Status</th>
+                      <th class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">Completion</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -144,9 +161,6 @@
                     <tr>
                       <td>
                         <div class="d-flex px-2">
-                          <div>
-                            <img src="../assets/img/small-logos/logo-asana.svg" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
-                          </div>
                           <div class="my-auto">
                             <h6 class="mb-0 text-sm">Asana</h6>
                           </div>
@@ -177,9 +191,6 @@
                     <tr>
                       <td>
                         <div class="d-flex px-2">
-                          <div>
-                            <img src="../assets/img/small-logos/github.svg" class="avatar avatar-sm rounded-circle me-2" alt="invision">
-                          </div>
                           <div class="my-auto">
                             <h6 class="mb-0 text-sm">Github</h6>
                           </div>
@@ -210,9 +221,6 @@
                     <tr>
                       <td>
                         <div class="d-flex px-2">
-                          <div>
-                            <img src="../assets/img/small-logos/logo-atlassian.svg" class="avatar avatar-sm rounded-circle me-2" alt="jira">
-                          </div>
                           <div class="my-auto">
                             <h6 class="mb-0 text-sm">Atlassian</h6>
                           </div>
@@ -243,9 +251,6 @@
                     <tr>
                       <td>
                         <div class="d-flex px-2">
-                          <div>
-                            <img src="../assets/img/small-logos/bootstrap.svg" class="avatar avatar-sm rounded-circle me-2" alt="webdev">
-                          </div>
                           <div class="my-auto">
                             <h6 class="mb-0 text-sm">Bootstrap</h6>
                           </div>
@@ -276,9 +281,6 @@
                     <tr>
                       <td>
                         <div class="d-flex px-2">
-                          <div>
-                            <img src="../assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm rounded-circle me-2" alt="slack">
-                          </div>
                           <div class="my-auto">
                             <h6 class="mb-0 text-sm">Slack</h6>
                           </div>
@@ -309,9 +311,6 @@
                     <tr>
                       <td>
                         <div class="d-flex px-2">
-                          <div>
-                            <img src="../assets/img/small-logos/devto.svg" class="avatar avatar-sm rounded-circle me-2" alt="xd">
-                          </div>
                           <div class="my-auto">
                             <h6 class="mb-0 text-sm">Devto</h6>
                           </div>
@@ -348,22 +347,78 @@
       </div>
     </div>
 
-    <script src="js/plugins/chartjs.min.js"></script>
-  <script>
-    var ctx = document.getElementById("chart-bars").getContext("2d");
+    <?php
+      /*$con = new mysqli('localhost','root','','project_tracking');
+      $query = $con->query("
+      SELECT (`Project_amount`) as amount,
+      MONTHNAME(`Date`) as monthname
+      FROM `payments` 
+      ");
 
-    new Chart(ctx, {
+      foreach($query as $data)
+      {
+        $amount[] =$data['amount'];
+        $month[] =$data['monthname'];
+      }*/
+    ?>
+
+    <?php
+      $con = new mysqli('localhost', 'root', '', 'project_tracking');
+
+      $query = $con->query("
+        SELECT 
+          COUNT(`Project_id`) AS completed, 
+          MONTHNAME(`EndDate`) AS monthname 
+        FROM `projects` 
+        WHERE `Status` = 'Completed'
+        GROUP BY monthname
+      ");
+
+      $completed = [];
+      $month = [];
+
+      foreach ($query as $data) {
+          $completed[] = $data['completed'];
+          $month[] = $data['monthname'];
+    }
+    ?>
+
+    <?php
+      $con = new mysqli('localhost', 'root', '', 'project_tracking');
+
+      $query = $con->query("
+        SELECT 
+          COUNT(`Project_id`) AS pending, 
+          MONTHNAME(`EndDate`) AS monthname 
+        FROM `projects` 
+        WHERE `Status` = 'Pending'
+        GROUP BY monthname
+      ");
+
+      $pending = [];
+      $month1 = [];
+
+      foreach ($query as $data) {
+        $pending[] = $data['pending'];
+        $month1[] = $data['monthname'];
+      }
+    ?>
+
+  <script src="js/plugins/chartjs.min.js"></script>
+  <script>
+    const ctx = document.getElementById("chart-bars").getContext("2d");
+    const myChart = new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["M", "T", "W", "T", "F", "S", "S"],
+        labels: <?php echo json_encode($month)?>,
         datasets: [{
-          label: "Sales",
+          label: "Completed",
           tension: 0.4,
           borderWidth: 0,
           borderRadius: 4,
           borderSkipped: false,
           backgroundColor: "rgba(255, 255, 255, .8)",
-          data: [50, 20, 10, 22, 50, 10, 40],
+          data: <?php echo json_encode($completed)?>,
           maxBarThickness: 6
         }, ],
       },
@@ -436,9 +491,9 @@
     new Chart(ctx2, {
       type: "line",
       data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: <?php echo json_encode($month1)?>,
         datasets: [{
-          label: "Mobile apps",
+          label: "Pending",
           tension: 0,
           borderWidth: 0,
           pointRadius: 5,
@@ -449,7 +504,7 @@
           borderWidth: 4,
           backgroundColor: "transparent",
           fill: true,
-          data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+          data: <?php echo json_encode($pending)?>,
           maxBarThickness: 6
 
         }],

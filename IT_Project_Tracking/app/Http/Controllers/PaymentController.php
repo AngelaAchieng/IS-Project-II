@@ -30,10 +30,12 @@ class PaymentController extends Controller
         ]);
 
         $payment_amount = $request->get('project_amount');
+        $payment_date = $request->get('bdate');
         $payment_projectid = $request->get('Project_id');
 
         $payment = new Payment();
         $payment->Project_amount =$payment_amount;
+        $payment->Date =$payment_date;
         $payment->project_id =$payment_projectid;
         $payment->save();
 
@@ -60,11 +62,13 @@ class PaymentController extends Controller
         ]);
         
         $payment_amount = $request->get('project_amount');
+        $payment_date = $request->get('bdate');
         $payment_projectid = $request->get('Project_id');
         $payment = Payment::find($Payment_id);
 
         if($payment){
             $payment->Project_amount =$payment_amount;
+            $payment->Date =$payment_date;
             $payment->project_id =$payment_projectid;
             $payment->save();
             return redirect('payments')->with('status','payment updated');

@@ -37,6 +37,7 @@
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
 
 <body class="bg-gray-200">
@@ -47,46 +48,51 @@
     </div>
   </div>
   <main class="main-content  mt-0">
-    <div class="page-header align-items-start min-vh-100" style="background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');">
+    <div class="page-header align-items-start min-vh-100" style="background-image: url('https://images.unsplash.com/photo-1560157368-946d9c8f7cb6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80');">
       <span class="mask bg-gradient-dark opacity-6"></span>
       <div class="container my-auto">
-        <div class="row">
-          <div class="col-lg-4 col-md-8 col-12 mx-auto">
-            <div class="card z-index-0 fadeIn3 fadeInBottom">
-              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
-                  <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Sign in</h4>
-                </div>
-              </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-7">
                 <div class="card">
-                  <div class="card-body">
-                    <form id="sign-in-form" action="{{URL::to('authLogin')}}" method="post">
-                      @csrf
-                      <label>Email</label>
-                      <div class="mb-3">
-                          <input value="{{old('email') ?? ""}}"  type="email" class="form-control  @error('email') is-invalid @enderror" name="email" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
-                          <div class="invalid-feedback">
-                            @error('email') {{$message}} @enderror
-                          </div>
+                    <div class="info mt-n5 mx-auto">
+                        <div class="icon icon-shape icon-xl border-radius-xl bg-gradient-warning shadow text-center mx-auto">
+                            <i class="material-icons opacity-10">lock_open</i>
+                        </div>
+                    </div>
+                    <div class="card-body px-lg-5 py-lg-5 text-center">
+                      <div class="otp">
+                        <div class="text-center text-muted mb-4">
+                            <h2>2-Step Verification</h2>
+                        </div>
+                        <div class="row gx-2 gx-sm-3 mb-3">
+                            <div class="col">
+                                <div class="input-group input-group-outline">
+                                    <input type="text" class="form-control form-control-lg text-center" maxlength="1" autocomplete="off" autocapitalize="off">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group input-group-outline">
+                                    <input type="text" class="form-control form-control-lg text-center" maxlength="1" autocomplete="off" autocapitalize="off">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group input-group-outline">
+                                    <input type="text" class="form-control form-control-lg text-center" maxlength="1" autocomplete="off" autocapitalize="off">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group input-group-outline">
+                                    <input type="text" class="form-control form-control-lg text-center" maxlength="1" autocomplete="off" autocapitalize="off">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="button" class="btn bg-gradient-warning w-100">Verify</button>
+                        </div>
                       </div>
-                      <label>Password</label>
-                      <div class="mb-3">
-                          <input value="" type="password" class="form-control  @error('password') is-invalid @enderror" name="password" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
-                          <div class="invalid-feedback">
-                            @error('password') {{$message}} @enderror
-                          </div>
-                      </div>
-                      <div class="form-check form-switch">
-
-                      <div class="center text-center ">
-                        <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2 pd-5">SIGN IN</button>
-                      </div>
-                    </form>
-                  </div>
+                    </div>
                 </div>
-              </form>
             </div>
-          </div>
         </div>
       </div>
       <footer class="footer position-absolute bottom-2 py-2 w-100">

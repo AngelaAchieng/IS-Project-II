@@ -31,6 +31,7 @@
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Start Date</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >End Date</th>
                                 <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Project Name</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Status</th>
                                 <th class="align-middle text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Actions</th>
                             </tr>
                         </thead>
@@ -42,6 +43,7 @@
                                 <td>{{$milestone->Milestone_duration}}</td>
                                 <td>{{$milestone->Start_Date}}</td>
                                 <td>{{$milestone->End_Date}}</td>
+                                <td>{{$milestone->Status}}</td>
                                 <td>{{$milestone->project->Project_name}}</td>
                                 <td class="align-middle text-center text-sm">
                                     <a href="{{URL::to('milestone/edit/'.$milestone->Milestone_id)}}">
@@ -54,7 +56,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="7">No record</td>
+                                <td colspan="8">No record</td>
                             </tr>
                             @endforelse
                         </tbody>

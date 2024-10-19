@@ -22,12 +22,14 @@
 
             <div class="card-body px-0 pt-0 pb-1 text-center">
                 <div class="table-responsive p-0">
-                    <table class="table align-items-center mb-0" style="width:80%">
+                    <table class="table align-items-center mb-0">
                         <thead>
                             <tr>
-                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" style="width:40%">#</th>
-                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" style="width:40%">Amount</th>
-                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" style="width:40%">Project Name</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">#</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Amount</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Project Name</th>
+                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7">Date</th>
+                                <th class="align-middle text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,10 +38,19 @@
                                 <td>{{$payment->Payment_id}}</td>
                                 <td>{{$payment->Project_amount}}</td>
                                 <td>{{$payment->project->Project_name}}</td>
+                                <td>{{$payment->Date}}</td>
+                                <td class="align-middle text-center text-sm">
+                                    <a href="{{URL::to('payment/edit/'.$payment->Payment_id)}}">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a onclick= "return confirm('Are you sure?')" href="{{URL::to('payment/delete/'.$payment->Payment_id)}}">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="3">No record</td>
+                                <td colspan="4">No record</td>
                             </tr>
                             @endforelse
                         </tbody>

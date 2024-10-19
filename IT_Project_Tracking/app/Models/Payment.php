@@ -12,7 +12,7 @@ class Payment extends Model
     //properties
     protected $table = "payments";
     protected $primaryKey = "Payment_id";
-    protected $fillable = ['Project_amount', 'project_id'];
+    protected $fillable = ['Project_amount', 'project_id', 'Date'];
 
     //relationships (payment belongs to a project)
     public function project(){

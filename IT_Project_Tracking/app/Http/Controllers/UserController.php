@@ -148,9 +148,19 @@ class UserController extends Controller
         
         }
     }
+
+    //User login
+    public function otp(){
+        return view('user.otp');  
+    }
     
     //User profile
     public function profile(){
         return view('user.profile');  
+    }
+
+    public function index(){
+        $User_id = DB::table('users')->pluck('id')->toArray();  // Fetch user IDs as an array
+        return view('your_view_name', compact('User_id'));  // Pass the data to the view
     }
 }

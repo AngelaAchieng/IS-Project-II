@@ -56,6 +56,13 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="col-6 mt-4">
+                            <label >Status</label>
+                            <div class="input-group input-group-outline mb-3">
+                                <label class="form-label">Enter Status</label>
+                                <input type='string' value="{{$milestone->Status}}" required name="mstatus" class="form-control">
+                            </div>
+                        </div>
                     </div>
                     <div class="d-flex justify-content-end mt-4">
                         <button type="submit" class="btn bg-gradient-dark m-0 ms-2">Update Milestone</button>

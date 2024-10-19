@@ -19,6 +19,7 @@ class CreateMilestonesTable extends Migration
             $table->string('Milestone_duration');
             $table->date('Start_Date');
             $table->date('End_Date');
+            $table->string('Status', 10);
             $table->unsignedInteger('project_id');
             $table->timestamps();
 
