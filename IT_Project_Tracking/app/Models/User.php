@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class User extends Authenticatable // Extend from Authenticatable, not Model
 {
     use HasFactory;
 
@@ -23,4 +24,9 @@ class User extends Model
     public function projects(){
         return $this->hasMany(Project::class);
     }
+    
+    public function messages() {
+        return $this->hasMany(Message::class);
+    }
+    
 }

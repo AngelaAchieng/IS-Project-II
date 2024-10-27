@@ -64,9 +64,9 @@
                       @csrf
                       <label>Email</label>
                       <div class="mb-3">
-                          <input value="{{old('email') ?? ""}}"  type="email" class="form-control  @error('email') is-invalid @enderror" name="email" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
+                          <input value="{{old('Email') ?? ""}}"  type="Email" class="form-control  @error('Email') is-invalid @enderror" name="Email" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
                           <div class="invalid-feedback">
-                            @error('email') {{$message}} @enderror
+                            @error('Email') {{$message}} @enderror
                           </div>
                       </div>
                       <label>Password</label>

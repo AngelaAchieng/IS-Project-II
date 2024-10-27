@@ -41,7 +41,7 @@
                         <div class="col-6">
                             <div class="input-group input-group-static">
                                 <label>Phone Number</label>
-                                <input type='string' value="{{$user->PhoneNumber}}" pattern='^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$' required name="phone_number" class="form-control">
+                                <input type='string' value="{{$user->PhoneNumber}}" pattern='^(\+\d\s?)?\(?\d\)?[\s.-]?\d[\s.-]?\d$' required name="phone_number" class="form-control">
                             </div>
                         </div>
                         <div class="col-6">

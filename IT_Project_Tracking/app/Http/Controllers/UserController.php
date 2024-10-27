@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Auth;
 
 class UserController extends Controller
 {
@@ -69,7 +71,7 @@ class UserController extends Controller
         $this->validate($request, [
             'users_names'=> 'min:5',
             'email' => 'email',
-            'phone_number' => 'phone_number',
+            'phone_number' => 'max:13',
             'Role_id' => 'required'
         ]);
         
@@ -114,38 +116,32 @@ class UserController extends Controller
     }
 
     public function authLogin(Request $request){
-        $user_email = $request->get('email');
+        $user_email = $request->get('Email');
         $user_password = $request->get('password');
-
-        $user = User::with('role')->where('email',$user_email)->first();
-
-        if($user){
-        
-            //check password
-            if(Hash::check($user_password,$user->Password)){
-            
+    
+        // Retrieve the user with the given email
+        $user = User::with('role')->where('Email', $user_email)->first();
+    
+        if ($user) {
+            // Check if the password matches
+            if (Hash::check($user_password, $user->Password)) {
+                // Log the user in
+                Auth::login($user);
+    
+                // Redirect based on the role
                 $role_name = $user->role->Role_name;
-                if($role_name == "Admin"){
-                    return redirect('admin');
-                }else if($role_name == "Systems Admin"){
-                    return redirect('systemsadmin');
-                }else if($role_name == "Technical Admin"){
-                    return redirect('technicaladmin');
-                }else if($role_name == "Systems Engineer"){
-                    return redirect('systemsengineer');
-                }else{
-                    return redirect('technicalengineer');
-                }
-
-            }else{
-            //invalid password
+                return match ($role_name) {
+                    'Admin' => redirect('admin'),
+                    'Systems Engineer' => redirect('systemsengineer'),
+                    default => redirect('technicalengineer'),
+                };
+            } else {
+                // Invalid password
                 return back()->with('fail', 'This password is not registered.');
             }
-        
-        }else{
-        //user not found
+        } else {
+            // User not found
             return back()->with('fail', 'This email is not registered.');
-        
         }
     }
 
@@ -157,10 +153,5 @@ class UserController extends Controller
     //User profile
     public function profile(){
         return view('user.profile');  
-    }
-
-    public function index(){
-        $User_id = DB::table('users')->pluck('id')->toArray();  // Fetch user IDs as an array
-        return view('your_view_name', compact('User_id'));  // Pass the data to the view
     }
 }

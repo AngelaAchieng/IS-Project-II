@@ -22,22 +22,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[UserController::class,'login']);
+Route::get('login',[UserController::class,'login']);
 Route::post('authLogin',[UserController::class,'authLogin']);
 Route::get('otp',[UserController::class,'otp']);
 
 
-
 Route::get('admin', function () {
     return view('admindashboard');
-});
-
-Route::get('systemsadmin', function () {
-    return view('systemsadmindashboard');
-});
-
-Route::get('technicaladmin', function () {
-    return view('technicaladmindashboard');
 });
 
 Route::get('systemsengineer', function () {
@@ -86,8 +77,8 @@ Route::get('payments',[PaymentController::class,'all']);
 Route::get('payment/add',[PaymentController::class,'add']);
 Route::post('payment/save',[PaymentController::class,'save']);
 Route::get('payment/delete/{Payment_id}',[PaymentController::class,'delete']);
-Route::get('payment/edit/{Payment_id}',[PaymentControlle::class,'edit']);
-Route::get('payment/delete/{Payment_id}',[PaymentControlle::class,'delete']);
+Route::get('payment/edit/{Payment_id}',[PaymentController::class,'edit']);
+Route::get('payment/delete/{Payment_id}',[PaymentController::class,'delete']);
 
 //projects routes
 Route::get('projects',[ProjectController::class,'all']);

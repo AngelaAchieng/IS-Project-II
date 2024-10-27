@@ -133,6 +133,18 @@
                 </div>
               </a>
             </li>
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center me-5 mt-3">
+              @if (Auth::check())
+                <p>Welcome, {{ Auth::user()->UserName }}</p> 
+              @else
+                <p>Please <a href="{{ route('login') }}">login</a>.</p>
+              @endif
+            </div>
+            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <a href="{{URL::to('chatify')}}">
+                <i class="fa-solid fa-message"></i>
+              </a>
+            </li>
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-bell cursor-pointer"></i>
@@ -185,7 +197,7 @@
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1 px-2">
-                          <a href="{{URL::to('/')}}">
+                          <a href="{{URL::to('login')}}">
                             <span class="font-weight-bold">Sign Out</span> 
                           </a>
                         </h6>
