@@ -197,7 +197,7 @@
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1 px-2">
-                          <a href="{{URL::to('/')}}">
+                          <a href="{{URL::to('login')}}">
                             <span class="font-weight-bold">Sign Out</span> 
                           </a>
                         </h6>

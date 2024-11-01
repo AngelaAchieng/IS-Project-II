@@ -116,23 +116,17 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 mt-4 mb-3">
+        <div class="col-lg-4 mt-1 mb-3 ">
           <div class="card z-index-2 ">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-              <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
+              <div class="bg-gradient-white border-radius-lg py-3 pe-1 mt-2">
                 <div class="chart">
-                  <canvas id="chart-line-tasks" class="chart-canvas" height="170"></canvas>
+                  <canvas id="chart-pie" class="chart-canvas" height="170"></canvas>
                 </div>
               </div>
             </div>
             <div class="card-body">
-              <h6 class="mb-0 ">Completed Tasks</h6>
-              <p class="text-sm ">Last Campaign Performance</p>
-              <hr class="dark horizontal">
-              <div class="d-flex ">
-                <i class="material-icons text-sm my-auto me-1">schedule</i>
-                <p class="mb-0 text-sm">just updated</p>
-              </div>
+              <h6 class="mb-0 ">Number of users</h6>
             </div>
           </div>
         </div>
@@ -404,6 +398,30 @@
       }
     ?>
 
+    <?php
+      $con = new mysqli('localhost', 'root', '', 'project_tracking');
+
+      $query = $con->query("
+          SELECT 
+          role_id,
+          COUNT(`User_id`) AS count
+          FROM `users`
+          WHERE `role_id` IN (5, 6) 
+          GROUP BY role_id
+      ");
+
+      $data = [];
+      while ($row = $query->fetch_assoc()) {
+          if ($row['role_id'] == 5) {
+              $data['Systems_Engineer'] = $row['count'];
+          } elseif ($row['role_id'] == 6) {
+              $data['Technical_Engineer'] = $row['count'];
+          }
+      }
+
+      $con->close();
+    ?>
+
   <script src="js/plugins/chartjs.min.js"></script>
   <script>
     const ctx = document.getElementById("chart-bars").getContext("2d");
@@ -569,86 +587,27 @@
       },
     });
 
-    var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
+    var ctx3 = document.getElementById("chart-pie").getContext("2d");
 
     new Chart(ctx3, {
-      type: "line",
+      type: "pie",
       data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: ['Systems Engineer', 'Technical Engineer'],
         datasets: [{
-          label: "Mobile apps",
-          tension: 0,
-          borderWidth: 0,
-          pointRadius: 5,
-          pointBackgroundColor: "rgba(255, 255, 255, .8)",
-          pointBorderColor: "transparent",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderWidth: 4,
-          backgroundColor: "transparent",
-          fill: true,
-          data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-          maxBarThickness: 6
-
-        }],
+          data: [
+            <?php echo $data['Systems_Engineer'] ?? 0; ?>,
+            <?php echo $data['Technical_Engineer'] ?? 0; ?>
+          ],
+            backgroundColor: ['#FF6384', '#36A2EB'],
+            hoverOffset: 4
+        }]
       },
       options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
+        legend:{
+          display: true,
+          position: 'bottom'
         },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#f8f9fa',
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
+      }
     });
   </script>
 @endsection
