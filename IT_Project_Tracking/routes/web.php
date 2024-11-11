@@ -10,6 +10,7 @@ use App\Http\Controllers\RequirementController;
 use App\Http\Controllers\RequirementtypeController;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('login',[UserController::class,'login']);
 Route::post('authLogin',[UserController::class,'authLogin']);
 Route::get('otp',[UserController::class,'otp']);
+
+Route::get('/notifications', function () {
+    // Query the database for projects with status "completed"
+    $notifications = DB::table('projects')
+        ->where('status', 'completed')
+        ->orderBy('updated_at', 'desc') // Optional: order by most recent
+        ->get()
+        ->map(function ($project) {
+            return [
+                'user_avatar' => 'path/to/default_avatar.jpg', // Placeholder; replace with actual user avatar if available
+                'message' => "Project '{$project->name}' has been completed",
+                'time' => $project->updated_at->diffForHumans(), // Display time in "x minutes ago" format
+            ];
+        });
+
+    return response()->json($notifications);
+});
 
 
 Route::get('admin', function () {

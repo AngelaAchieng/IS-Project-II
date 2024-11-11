@@ -52,7 +52,7 @@ class RequirementController extends Controller
         $requirement->project_id =$requirement_projectid;
         $requirement->save();
 
-        return redirect('requirements');
+        return redirect('requirements')->with('success','Requirement successfully added');
     }
 
     //Make changes
@@ -96,7 +96,7 @@ class RequirementController extends Controller
             $requirement->project_id =$requirement_projectid;
             $requirement->save();
     
-            return redirect('requirements')->with('status','requirement updated');
+            return redirect('requirements')->with('success','Requirement updated');
         }else{
             return redirect('requirements');
         }

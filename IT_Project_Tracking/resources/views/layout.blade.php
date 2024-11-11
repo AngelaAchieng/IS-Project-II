@@ -164,39 +164,28 @@
                 <p>Please <a href="{{ route('login') }}">login</a>.</p>
               @endif
             </div>
+
+            @php
+              use Illuminate\Support\Facades\Auth;
+              use App\Models\Message;
+
+              // Count the number of unread messages for the authenticated user
+              $unreadMessagesCount = Message::where('to_id', Auth::User_id())
+                                  ->where('seen', 0)
+                                  ->count();
+              @endphp
+
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="{{URL::to('chatify')}}">
-                <i class="fa-solid fa-message"></i>
+              <a href="{{ URL::to('chatify') }}" class="position-relative">
+                  <i class="fa-solid fa-message"></i>
+                  
+                  {{-- Display the unread message count as a badge if there are unread messages --}}
+                  @if ($unreadMessagesCount > 0)
+                      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                          {{ $unreadMessagesCount }}
+                      </span>
+                  @endif
               </a>
-            </li>
-            <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-bell cursor-pointer"></i>
-              </a>
-              <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                <li class="mb-2">
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
-                    <div class="d-flex py-1">
-                      <div class="my-auto">
-                        <img src="img/team-2.jpg" class="avatar avatar-sm  me-3 ">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">New message</span> from Laur
-                        </h6>
-                        <p class="text-xs text-secondary mb-0">
-                          <i class="fa fa-clock me-1"></i>
-                          13 minutes ago
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
-                  </a>
-                </li>
-              </ul>
             </li>
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -331,8 +320,22 @@
 
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{URL::to('js/material-dashboard.min.js?v=3.1.0')}}"></script>
-  
-  @yield('scripts')
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="{{URL::to('assets/notify.min.js')}}"></script>
+  <script>
+    $(document).ready(function(){
+      @if ($errors->any())
+        @foreach ($errors->all() as $error)
+          $.notify("{{ $error }}", "error");
+        @endforeach
+      @endif
+
+      @if (session('success'))
+        $.notify("{{ session('success') }}", 'success');
+      @endif
+    })
+  </script>
+
 </body>
 
 </html>

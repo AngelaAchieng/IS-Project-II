@@ -47,7 +47,7 @@ class MilestoneController extends Controller
         $milestone->project_id =$milestone_projectid;
         $milestone->save();
 
-        return redirect('milestones');
+        return redirect('milestones')->with('success','Milestone successfully added');
     }
 
     //Make changes
@@ -89,7 +89,7 @@ class MilestoneController extends Controller
             $milestone->project_id =$milestone_projectid;
             $milestone->save();
     
-            return redirect('milestones')->with('status','milestone updated');
+            return redirect('milestones')->with('success','Milestone updated');
         }else{
             return redirect('milestones');
         }

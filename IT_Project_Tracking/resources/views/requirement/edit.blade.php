@@ -17,15 +17,6 @@
                     <h6 class="mb-0">Edit Requirement</h6>
                 </div>
                 <div class="card-body pt-2">
-                    @if ($errors->any())
-                        <div class ="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <h6 class="text-white">{{$error}}</h6>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                     <div class="input-group input-group-dynamic">
                         <input type='text' value="{{$requirement->Requirement_name}}" required name="requirement_name" class="form-control">
                     </div>

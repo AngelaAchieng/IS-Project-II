@@ -17,15 +17,6 @@
                     <h6 class="mb-0">New User</h6>
                 </div>
                 <div class="card-body pt-2">
-                    @if ($errors->any())
-                        <div class ="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <h6 class="text-white">{{$error}}</h6>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                     <div class="input-group input-group-dynamic">
                         <label class="form-label">Users Names</label>
                         <input type='text' required name="users_names" class="form-control">

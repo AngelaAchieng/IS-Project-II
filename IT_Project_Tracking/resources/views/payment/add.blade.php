@@ -17,15 +17,6 @@
                     <h6 class="mb-0">New Billing</h6>
                 </div>
                 <div class="card-body pt-2">
-                    @if ($errors->any())
-                        <div class ="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <h6 class="text-white">{{$error}}</h6>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                     <label class="mt-3">Project Amount</label>
                     <div class="input-group input-group-outline mb-4">
                         <label class="form-label">Enter Amount</label>

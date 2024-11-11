@@ -37,7 +37,7 @@ class OrganizationController extends Controller
         $organization->Organization_description =$organization_description;
         $organization->save();
 
-        return redirect('organizations');
+        return redirect('organizations')->with('success','Organization successfully added');
     }
 
     //Make changes
@@ -68,7 +68,7 @@ class OrganizationController extends Controller
             $organization->Organization_name =$organization_name;
             $organization->Organization_description =$organization_description;
             $organization->save();
-            return redirect('organizations')->with('status','Organization info updated');
+            return redirect('organizations')->with('success','Organization info updated');
         }else{
             return redirect('organizations');
         }

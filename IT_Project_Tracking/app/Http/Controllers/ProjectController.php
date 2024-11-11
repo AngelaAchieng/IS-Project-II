@@ -56,7 +56,7 @@ class ProjectController extends Controller
         $project->organization_id =$project_organizationid;
         $project->save();
 
-        return redirect('projects');
+        return redirect('projects')->with('success','Project successfully added');
     }
 
     //Make changes
@@ -106,7 +106,7 @@ class ProjectController extends Controller
             $project->organization_id =$project_organizationid;
             $project->save();
     
-            return redirect('projects')->with('status','project updated');
+            return redirect('projects')->with('success','Project updated');
         }else{
             return redirect('projects');
         }

@@ -49,7 +49,7 @@ class UserController extends Controller
         $user->role_id =$user_roleid;
         $user->save();
 
-        return redirect('users');
+        return redirect('users')->with('success','User successfully added');
     }
 
     //Make changes
@@ -91,7 +91,7 @@ class UserController extends Controller
             $user->role_id =$user_roleid;
             $user->save();
     
-            return redirect('users')->with('status','user updated');
+            return redirect('users')->with('success','User updated');
         }else{
             return redirect('users');
         }

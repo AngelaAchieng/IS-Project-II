@@ -33,7 +33,7 @@ class RequirementtypeController extends Controller
         $requirementtype->RequirementType_Name =$requirementtype_name;
         $requirementtype->save();
 
-        return redirect('requirementtypes');
+        return redirect('requirementtypes')->with('status',"$requirementtype_name successfully added");
     }
 
     //Make changes

@@ -33,7 +33,7 @@ class RoleController extends Controller
         $role->Role_name =$role_name;
         $role->save();
 
-        return redirect('roles');
+        return redirect('roles')->with('success',"$role_name successfully added");
     }
 
     //Make changes
@@ -61,7 +61,7 @@ class RoleController extends Controller
         if($role){
             $role->Role_name =$role_name;
             $role->save();
-            return redirect('roles')->with('status',"$role_name updated");
+            return redirect('roles')->with('success',"$role_name updated");
         }else{
             return redirect('roles');
         }

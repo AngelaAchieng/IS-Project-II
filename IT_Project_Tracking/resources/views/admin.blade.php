@@ -103,22 +103,6 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('requirements*')) ? 'active': ''}}" href="{{URL::to('requirements')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fa-solid fa-diagram-project"></i>
-            </div>
-            <span class="nav-link-text ms-1">Requirements</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('milestone*')) ? 'active': ''}}" href="{{URL::to('milestones')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fa-solid fa-diagram-project"></i>
-            </div>
-            <span class="nav-link-text ms-1">Milestones</span>
-          </a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link text-white {{(request() ->is('payment*')) ? 'active': ''}}" href="{{URL::to('payments')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
@@ -164,39 +148,27 @@
                 <p>Please <a href="{{ route('login') }}">login</a>.</p>
               @endif
             </div>
+            @php
+              use Illuminate\Support\Facades\Auth;
+              use App\Models\ChMessage;
+
+              // Count the number of unread messages for the authenticated user
+              $unreadMessagesCount = ChMessage::where('to_id', Auth::id())
+                                  ->where('seen', 0)
+                                  ->count();
+              @endphp
+
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="{{URL::to('chatify')}}">
-                <i class="fa-solid fa-message"></i>
+              <a href="{{ URL::to('chatify') }}" class="position-relative">
+                  <i class="fa-solid fa-message"></i>
+                  
+                  {{-- Display the unread message count as a badge if there are unread messages --}}
+                  @if ($unreadMessagesCount > 0)
+                      <span class="position-absolute bottom-0 start-100 translate-middle-x badge rounded-pill bg-danger" style="font-size: 0.6em; padding: 0.2em 0.4em;">
+                          {{ $unreadMessagesCount }}
+                      </span>
+                  @endif
               </a>
-            </li>
-            <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-bell cursor-pointer"></i>
-              </a>
-              <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                <li class="mb-2">
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
-                    <div class="d-flex py-1">
-                      <div class="my-auto">
-                        <img src="img/team-2.jpg" class="avatar avatar-sm  me-3 ">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">New message</span> from Laur
-                        </h6>
-                        <p class="text-xs text-secondary mb-0">
-                          <i class="fa fa-clock me-1"></i>
-                          13 minutes ago
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
-                  </a>
-                </li>
-              </ul>
             </li>
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">

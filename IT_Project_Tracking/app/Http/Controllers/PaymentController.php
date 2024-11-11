@@ -39,7 +39,7 @@ class PaymentController extends Controller
         $payment->project_id =$payment_projectid;
         $payment->save();
 
-        return redirect('payments');
+        return redirect('payments')->with('success','Payment successfully added');
     }
 
     //Make changes
@@ -71,7 +71,7 @@ class PaymentController extends Controller
             $payment->Date =$payment_date;
             $payment->project_id =$payment_projectid;
             $payment->save();
-            return redirect('payments')->with('status','payment updated');
+            return redirect('payments')->with('success','Payment updated');
         }else{
             return redirect('payments');
         }
