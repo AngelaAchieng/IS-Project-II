@@ -167,10 +167,10 @@
 
             @php
               use Illuminate\Support\Facades\Auth;
-              use App\Models\Message;
+              use App\Models\ChMessage;
 
               // Count the number of unread messages for the authenticated user
-              $unreadMessagesCount = Message::where('to_id', Auth::User_id())
+              $unreadMessagesCount = ChMessage::where('to_id', Auth::id())
                                   ->where('seen', 0)
                                   ->count();
               @endphp
@@ -181,7 +181,7 @@
                   
                   {{-- Display the unread message count as a badge if there are unread messages --}}
                   @if ($unreadMessagesCount > 0)
-                      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      <span class="position-absolute bottom-0 start-100 translate-middle-x badge rounded-pill bg-danger" style="font-size: 0.6em; padding: 0.2em 0.4em;">
                           {{ $unreadMessagesCount }}
                       </span>
                   @endif

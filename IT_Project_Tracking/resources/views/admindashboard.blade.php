@@ -73,64 +73,73 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-sm-6">
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-header p-3 pt-2">
+              <div class="icon icon-lg icon-shape bg-gradient-info text-center border-radius-xl mt-n4 position-absolute">
+                <i class="material-icons opacity-10">person</i>
+              </div>
+              <div class="text-end pt-1">
+                <p class="text-sm mb-0 text-capitalize">Systems Engineers</p>
+                @php
+                  // Get the role ID for "Systems Engineer"
+                  $roleId = DB::table('roles')->where('Role_name', 'Systems Engineer')->value('Role_id');
+
+                  // Count users with the "Systems Engineer" role
+                  $systemsEngineerCount = DB::table('users')->where('role_id', $roleId)->count();
+                @endphp
+
+                <h4 class="mb-0">{{ $systemsEngineerCount }}</h4>
+              </div>
+              <div class="text-end pt-0.25">
+                <p class="text-sm mb-0 text-capitalize">Technical Engineers</p>
+                  @php
+                    // Get the role ID for "Technical Engineer"
+                    $roleId = DB::table('roles')->where('Role_name', 'Technical Engineer')->value('Role_id');
+
+                    // Count users with the "Technical Engineer" role
+                    $technicalEngineerCount = DB::table('users')->where('role_id', $roleId)->count();
+                  @endphp
+
+                  <h4 class="mb-0">{{ $technicalEngineerCount }}</h4>
+              </div>
+            </div>
+            <div class="card-footer p-1"></div>
+          </div>
+        </div>
       </div>
       <div class="row mt-4">
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
-          <div class="card z-index-2 ">
+        <div class="col-lg-6 col-md-8 mt-4 mb-4">
+          <div class="card z-index-2" style="height: 370px;">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
               <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                <div class="chart">
-                  <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
+                <div class="chart" style="width: 100%; height: 300px;">
+                  <canvas id="chart-bars" class="chart-canvas" style="width: 100%; height: 100%;"></canvas>
                 </div>
               </div>
             </div>
             <div class="card-body">
-              <h6 class="mb-0 ">Completed Projects</h6>
-              <p class="text-sm ">Yearly projects</p>
-              <hr class="dark horizontal">
-              <div class="d-flex ">
-                <i class="material-icons text-sm my-auto me-1">schedule</i>
-                <p class="mb-0 text-sm"> updated 2 days ago </p>
-              </div>
+              <h6 class="mt-1">Completed Projects</h6>
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
-          <div class="card z-index-2  ">
+
+        <div class="col-lg-6 col-md-8 mt-4 mb-4">
+          <div class="card z-index-2" style="height: 370px;">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
               <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
-                <div class="chart">
-                  <canvas id="chart-line" class="chart-canvas" height="170"></canvas>
+                <div class="chart" style="width: 100%; height: 300px;">
+                  <canvas id="chart-line" class="chart-canvas" style="width: 100%; height: 100%;"></canvas>
                 </div>
               </div>
             </div>
             <div class="card-body">
-              <h6 class="mb-0 "> Pending Projects</h6>
-              <p class="text-sm "> Yearly Projects </p>
-              <hr class="dark horizontal">
-              <div class="d-flex ">
-                <i class="material-icons text-sm my-auto me-1">schedule</i>
-                <p class="mb-0 text-sm"> updated 4 min ago </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 mt-1 mb-3 ">
-          <div class="card z-index-2 ">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-              <div class="bg-gradient-white border-radius-lg py-3 pe-1 mt-2">
-                <div class="chart">
-                  <canvas id="chart-pie" class="chart-canvas" height="170"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <h6 class="mb-0 ">Number of users</h6>
+              <h6 class="mt-1">Pending Projects</h6>
             </div>
           </div>
         </div>
       </div>
+
       <div class="row">
         <div class="col-12">
           <div class="card my-4">
@@ -139,199 +148,91 @@
                 <h6 class="text-white text-capitalize ps-3">Projects table</h6>
               </div>
             </div>
+
+            <?php
+              // Database connection
+              $con = new mysqli('localhost', 'root', '', 'project_tracking');
+
+              // Query to join the projects, users, and milestones tables
+              $query = $con->query("
+                SELECT 
+                  p.Project_name, 
+                  p.Status AS project_status, 
+                  u.UserName AS engineer, 
+                  (SELECT COUNT(*) FROM milestones m WHERE m.project_id = p.Project_id AND m.Status = 'Completed') AS completed_milestones,
+                  (SELECT COUNT(*) FROM milestones m WHERE m.project_id = p.Project_id) AS total_milestones
+                FROM projects p
+                LEFT JOIN users u ON p.user_id = u.User_id
+              ");
+
+              $projects = [];
+              while ($data = $query->fetch_assoc()) {
+                  // Calculate the completion percentage
+                  if ($data['total_milestones'] > 0) {
+                      $completion_percentage = round(($data['completed_milestones'] / $data['total_milestones']) * 100);
+                  } else {
+                      $completion_percentage = 0;  // No milestones means 0% completion
+                  }
+
+                  // Store the project data
+                  $projects[] = [
+                      'Project_name' => $data['Project_name'],
+                      'project_status' => $data['project_status'],
+                      'engineer' => $data['engineer'],
+                      'completion_percentage' => $completion_percentage,
+                  ];
+              }
+            ?>
+
             <div class="card-body px-0 pb-2">
               <div class="table-responsive p-0">
                 <table class="table align-items-center justify-content-center mb-0">
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Project</th>
-                      <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Budget</th>
+                      <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Engineer</th>
                       <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Status</th>
                       <th class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">Completion</th>
-                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2">
-                          <div class="my-auto">
-                            <h6 class="mb-0 text-sm">Asana</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0">$2,500</p>
-                      </td>
-                      <td>
-                        <span class="text-xs font-weight-bold">working</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <div class="d-flex align-items-center justify-content-center">
-                          <span class="me-2 text-xs font-weight-bold">60%</span>
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                    <?php foreach ($projects as $project) { ?>
+                      <tr>
+                        <td>
+                          <div class="d-flex px-2">
+                            <div class="my-auto">
+                              <h6 class="mb-0 text-sm"><?php echo $project['Project_name']; ?></h6>
                             </div>
                           </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <button class="btn btn-link text-secondary mb-0">
-                          <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2">
-                          <div class="my-auto">
-                            <h6 class="mb-0 text-sm">Github</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0">$5,000</p>
-                      </td>
-                      <td>
-                        <span class="text-xs font-weight-bold">done</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <div class="d-flex align-items-center justify-content-center">
-                          <span class="me-2 text-xs font-weight-bold">100%</span>
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                          </td>
+                          <td>
+                            <p class="text-sm font-weight-bold mb-0"><?php echo $project['engineer']; ?></p>
+                          </td>
+                          <td class="align-middle text-center text-sm">
+                            <?php if ($project['project_status'] == 'Completed') { ?>
+                              <span class="badge badge-sm bg-gradient-success">Completed</span>
+                            <?php } else { ?>
+                              <span class="badge badge-sm bg-gradient-secondary">Pending</span>
+                            <?php } ?>
+                          </td>
+                          <td class="align-middle text-center">
+                            <div class="d-flex align-items-center justify-content-center">
+                              <span class="me-2 text-xs font-weight-bold"><?php echo $project['completion_percentage']; ?>%</span>
+                              <div>
+                                <div class="progress">
+                                  <div class="progress-bar bg-gradient-<?php echo ($project['completion_percentage'] == 100 ? 'success' : ($project['completion_percentage'] >= 50 ? 'info' : 'danger')); ?>" 
+                                    role="progressbar" 
+                                    aria-valuenow="<?php echo $project['completion_percentage']; ?>" 
+                                    aria-valuemin="0" 
+                                    aria-valuemax="100" 
+                                    style="width: <?php echo $project['completion_percentage']; ?>%;">
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2">
-                          <div class="my-auto">
-                            <h6 class="mb-0 text-sm">Atlassian</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0">$3,400</p>
-                      </td>
-                      <td>
-                        <span class="text-xs font-weight-bold">canceled</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <div class="d-flex align-items-center justify-content-center">
-                          <span class="me-2 text-xs font-weight-bold">30%</span>
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="30" style="width: 30%;"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2">
-                          <div class="my-auto">
-                            <h6 class="mb-0 text-sm">Bootstrap</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0">$14,000</p>
-                      </td>
-                      <td>
-                        <span class="text-xs font-weight-bold">working</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <div class="d-flex align-items-center justify-content-center">
-                          <span class="me-2 text-xs font-weight-bold">80%</span>
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="80" style="width: 80%;"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2">
-                          <div class="my-auto">
-                            <h6 class="mb-0 text-sm">Slack</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0">$1,000</p>
-                      </td>
-                      <td>
-                        <span class="text-xs font-weight-bold">canceled</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <div class="d-flex align-items-center justify-content-center">
-                          <span class="me-2 text-xs font-weight-bold">0%</span>
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0" style="width: 0%;"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2">
-                          <div class="my-auto">
-                            <h6 class="mb-0 text-sm">Devto</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0">$2,300</p>
-                      </td>
-                      <td>
-                        <span class="text-xs font-weight-bold">done</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <div class="d-flex align-items-center justify-content-center">
-                          <span class="me-2 text-xs font-weight-bold">100%</span>
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                      </td>
-                    </tr>
+                          </td>
+                      </tr>
+                    <?php } ?>
                   </tbody>
                 </table>
               </div>
@@ -357,70 +258,52 @@
     ?>
 
     <?php
-      $con = new mysqli('localhost', 'root', '', 'project_tracking');
+    $con = new mysqli('localhost', 'root', '', 'project_tracking');
 
-      $query = $con->query("
-        SELECT 
-          COUNT(`Project_id`) AS completed, 
-          MONTHNAME(`EndDate`) AS monthname 
-        FROM `projects` 
-        WHERE `Status` = 'Completed'
-        GROUP BY monthname
-      ");
+    $query = $con->query("
+      SELECT 
+        COUNT(`Project_id`) AS completed, 
+        MONTHNAME(`EndDate`) AS monthname,
+        MONTH(`EndDate`) AS month_number
+      FROM `projects` 
+      WHERE `Status` = 'Completed'
+      GROUP BY month_number, monthname
+      ORDER BY month_number
+    ");
 
-      $completed = [];
-      $month = [];
+    $completed = [];
+    $month = [];
 
-      foreach ($query as $data) {
-          $completed[] = $data['completed'];
-          $month[] = $data['monthname'];
+    foreach ($query as $data) {
+        $completed[] = $data['completed'];
+        $month[] = $data['monthname'];
     }
     ?>
 
+
     <?php
-      $con = new mysqli('localhost', 'root', '', 'project_tracking');
+    $con = new mysqli('localhost', 'root', '', 'project_tracking');
 
-      $query = $con->query("
-        SELECT 
-          COUNT(`Project_id`) AS pending, 
-          MONTHNAME(`EndDate`) AS monthname 
-        FROM `projects` 
-        WHERE `Status` = 'Pending'
-        GROUP BY monthname
-      ");
+    $query = $con->query("
+      SELECT 
+        COUNT(`Project_id`) AS pending, 
+        MONTHNAME(`EndDate`) AS monthname,
+        MONTH(`EndDate`) AS month_number
+      FROM `projects` 
+      WHERE `Status` = 'Pending'
+      GROUP BY month_number, monthname
+      ORDER BY month_number
+    ");
 
-      $pending = [];
-      $month1 = [];
+    $pending = [];
+    $month1 = [];
 
-      foreach ($query as $data) {
+    foreach ($query as $data) {
         $pending[] = $data['pending'];
         $month1[] = $data['monthname'];
-      }
+    }
     ?>
 
-    <?php
-      $con = new mysqli('localhost', 'root', '', 'project_tracking');
-
-      $query = $con->query("
-          SELECT 
-          role_id,
-          COUNT(`User_id`) AS count
-          FROM `users`
-          WHERE `role_id` IN (5, 6) 
-          GROUP BY role_id
-      ");
-
-      $data = [];
-      while ($row = $query->fetch_assoc()) {
-          if ($row['role_id'] == 5) {
-              $data['Systems_Engineer'] = $row['count'];
-          } elseif ($row['role_id'] == 6) {
-              $data['Technical_Engineer'] = $row['count'];
-          }
-      }
-
-      $con->close();
-    ?>
 
   <script src="js/plugins/chartjs.min.js"></script>
   <script>
@@ -437,7 +320,7 @@
           borderSkipped: false,
           backgroundColor: "rgba(255, 255, 255, .8)",
           data: <?php echo json_encode($completed)?>,
-          maxBarThickness: 6
+          maxBarThickness: 20
         }, ],
       },
       options: {
@@ -585,29 +468,6 @@
           },
         },
       },
-    });
-
-    var ctx3 = document.getElementById("chart-pie").getContext("2d");
-
-    new Chart(ctx3, {
-      type: "pie",
-      data: {
-        labels: ['Systems Engineer', 'Technical Engineer'],
-        datasets: [{
-          data: [
-            <?php echo $data['Systems_Engineer'] ?? 0; ?>,
-            <?php echo $data['Technical_Engineer'] ?? 0; ?>
-          ],
-            backgroundColor: ['#FF6384', '#36A2EB'],
-            hoverOffset: 4
-        }]
-      },
-      options: {
-        legend:{
-          display: true,
-          position: 'bottom'
-        },
-      }
     });
   </script>
 @endsection

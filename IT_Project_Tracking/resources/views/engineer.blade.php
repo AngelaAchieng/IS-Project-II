@@ -52,7 +52,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('engineer')) ? 'active': ''}}" href="{{URL::to('engineer')}}">
+          <a class="nav-link text-white {{(request() ->is('admin')) ? 'active': ''}}" href="{{URL::to('admin')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
              <i class="nav-icon fa-solid fa-window-maximize"></i>
             </div>
@@ -65,7 +65,7 @@
         <li class="nav-item">
           <a class="nav-link text-white {{(request() ->is('organization*')) ? 'active': ''}}" href="{{URL::to('organizations')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fa-solid fa-sitemap"></i>
+              <i class="fa-solid fa-building"></i>
             </div>
             <span class="nav-link-text ms-1">Organizations</span>
           </a>
@@ -81,7 +81,7 @@
         <li class="nav-item">
           <a class="nav-link text-white {{(request() ->is('requirementtype*')) ? 'active': ''}}" href="{{URL::to('requirementtypes')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fa-solid fa-diagram-project"></i>
+              <i class="fa-solid fa-rectangle-list"></i>
             </div>
             <span class="nav-link-text ms-1">Requirement Types</span>
           </a>
@@ -89,7 +89,7 @@
         <li class="nav-item">
           <a class="nav-link text-white {{(request() ->is('requirements*')) ? 'active': ''}}" href="{{URL::to('requirements')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fa-solid fa-diagram-project"></i>
+              <i class="fa-solid fa-clipboard-list"></i>
             </div>
             <span class="nav-link-text ms-1">Requirements</span>
           </a>
@@ -97,9 +97,17 @@
         <li class="nav-item">
           <a class="nav-link text-white {{(request() ->is('milestone*')) ? 'active': ''}}" href="{{URL::to('milestones')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fa-solid fa-diagram-project"></i>
+              <i class="fa-solid fa-list-check"></i>
             </div>
             <span class="nav-link-text ms-1">Milestones</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white {{(request() ->is('payment*')) ? 'active': ''}}" href="{{URL::to('payments')}}">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">receipt_long</i>
+            </div>
+            <span class="nav-link-text ms-1">Billing</span>
           </a>
         </li>
       </ul>
@@ -119,7 +127,7 @@
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group input-group-outline">
-              <label class="form-label">Type here...</label>
+              <label class="form-label">Search...</label>
               <input type="text" class="form-control">
             </div>
           </div>
@@ -140,34 +148,28 @@
                 <p>Please <a href="{{ route('login') }}">login</a>.</p>
               @endif
             </div>
+
+            @php
+              use Illuminate\Support\Facades\Auth;
+              use App\Models\ChMessage;
+
+              // Count the number of unread messages for the authenticated user
+              $unreadMessagesCount = ChMessage::where('to_id', Auth::id())
+                                  ->where('seen', 0)
+                                  ->count();
+              @endphp
+
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-bell cursor-pointer"></i>
+              <a href="{{ URL::to('chatify') }}" class="position-relative">
+                  <i class="fa-solid fa-message"></i>
+                  
+                  {{-- Display the unread message count as a badge if there are unread messages --}}
+                  @if ($unreadMessagesCount > 0)
+                      <span class="position-absolute bottom-0 start-100 translate-middle-x badge rounded-pill bg-danger" style="font-size: 0.6em; padding: 0.2em 0.4em;">
+                          {{ $unreadMessagesCount }}
+                      </span>
+                  @endif
               </a>
-              <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                <li class="mb-2">
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
-                    <div class="d-flex py-1">
-                      <div class="my-auto">
-                        <img src="img/team-2.jpg" class="avatar avatar-sm  me-3 ">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">New message</span> from Laur
-                        </h6>
-                        <p class="text-xs text-secondary mb-0">
-                          <i class="fa fa-clock me-1"></i>
-                          13 minutes ago
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
-                  </a>
-                </li>
-              </ul>
             </li>
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -207,7 +209,9 @@
     </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
+      
       @yield('content')
+
       <footer class="footer py-4  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
@@ -300,8 +304,22 @@
 
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{URL::to('js/material-dashboard.min.js?v=3.1.0')}}"></script>
-  <script src="{{URL::to('js/app.js')}}"></script>
-  @yield('scripts')
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="{{URL::to('assets/notify.min.js')}}"></script>
+  <script>
+    $(document).ready(function(){
+      @if ($errors->any())
+        @foreach ($errors->all() as $error)
+          $.notify("{{ $error }}", "error");
+        @endforeach
+      @endif
+
+      @if (session('success'))
+        $.notify("{{ session('success') }}", 'success');
+      @endif
+    })
+  </script>
+
 </body>
 
 </html>
