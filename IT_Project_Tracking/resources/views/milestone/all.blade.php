@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('engineer')
 
 @section('headTitle','Milestones')
 @section('pageTitle','Milestones - ')
@@ -61,23 +61,12 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <div class="pagn-links">
+                    {{$milestones->links()}}
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-@endsection
-
-@section('scripts')
-    @if(session('status'))
-        <script type="text/javascript">
-            iziToast.show({
-                icon: 'fa-solid fa-circle-check',
-                message: "{{session('status')}}",
-                position: 'topRight'
-            });
-        </script>
-    @endif
 
 @endsection

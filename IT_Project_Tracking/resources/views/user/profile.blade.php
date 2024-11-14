@@ -171,33 +171,6 @@
             </li>
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-bell cursor-pointer"></i>
-              </a>
-              <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                <li class="mb-2">
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
-                    <div class="d-flex py-1">
-                      <div class="my-auto">
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">New message</span> from Laur
-                        </h6>
-                        <p class="text-xs text-secondary mb-0">
-                          <i class="fa fa-clock me-1"></i>
-                          13 minutes ago
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-user me-sm-1"></i>
               </a>
               <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
@@ -232,75 +205,80 @@
       </div>
     </nav>
     <!-- End Navbar -->
-    <div class="container-fluid px-2 px-md-4">
-      <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
-        <span class="mask  bg-gradient-primary  opacity-6"></span>
-      </div>
-      <div class="card card-body mx-3 mx-md-4 mt-n6">
-        <div class="row gx-4 mb-2">
-          <div class="col-auto">
-            <div class="avatar avatar-xl position-relative">
-              <img src="{{URL::to('img/bruce-mars.jpg')}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
-            </div>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- First Card: Edit Profile -->
+      <div class="col-lg-6 col-md-6 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Profile Information</h4>
           </div>
-          <div class="col-auto my-auto">
-            <div class="h-100">
-              <h5 class="mb-1">
-              {{ Auth::user()->UserName ?? '' }}
-              </h5>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="row">
-            <div class="col-12 col-xl-8">
-              <div class="card card-plain h-100">
-                <div class="card-header pb-0 p-3">
+          <div class="card-body">
+            <form>
+            @if (Auth::check())
                   <div class="row">
-                    <div class="col-md-8 d-flex align-items-center">
-                      <h6 class="mb-0">Profile Information
-                        <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top"></i>
-                      </h6>
+                    <div class="col-md-6">
+                      <label>Username</label>
+                      <div class="input-group input-group-dynamic">
+                        <input type="text" value="{{ Auth::user()->UserName ?? '' }}" required name="users_names" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label>Email</label>
+                      <div class="input-group input-group-outline mb-4">
+                        <input type="email" value="{{ Auth::user()->Email ?? '' }}" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}" required name="email" class="form-control">
+                      </div>
                     </div>
                   </div>
-                </div>
-                @if (Auth::check())
                   <div class="row">
-                      <div class="col-md-6">
-                            <div class="input-group input-group-dynamic">
-                                <input type="text" value="{{ Auth::user()->UserName ?? '' }}" required name="users_names" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label>Email</label>
-                            <div class="input-group input-group-outline mb-4">
-                                <input type="email" value="{{ Auth::user()->Email ?? '' }}" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}" required name="email" class="form-control">
-                            </div>
-                        </div>
+                    <div class="col-md-6">
+                      <label>Password</label>
+                      <div class="input-group input-group-outline mb-4">
+                        <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required name="password" class="form-control">
                       </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Password</label>
-                            <div class="input-group input-group-outline mb-4">
-                                <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required name="password" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label>Phone Number</label>
-                            <div class="input-group input-group-static">
-                                <input type="text" value="{{ Auth::user()->PhoneNumber ?? '' }}" pattern="^(\+\d\s?)?(\d{3}[-.\s]?)?[\d]{3}[-.\s]?[\d]{4}$" required name="phone_number" class="form-control">
-                            </div>
-                        </div>
                     </div>
+                    <div class="col-md-6">
+                      <label>Phone Number</label>
+                      <div class="input-group input-group-static">
+                        <input type="text" value="{{ Auth::user()->PhoneNumber ?? '' }}" pattern="^(\+\d\s?)?(\d{3}[-.\s]?)?[\d]{3}[-.\s]?[\d]{4}$" required name="phone_number" class="form-control">
+                      </div>
+                    </div>
+                  </div>
                 @else
-                    <p>Please <a href="{{ route('login') }}">login</a>.</p>
+                  <p>Please <a href="{{ route('login') }}">login</a>.</p>
                 @endif
+              <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second Card: User Information -->
+      <div class="col-lg-5 col-md-6">
+        <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
+          <span class="mask bg-gradient-primary opacity-6"></span>
+        </div>
+        <div class="card card-body mx-3 mx-md-4 mt-n6">
+          <div class="row gx-4 mb-2">
+            <div class="col-auto">
+              <div class="avatar avatar-xl position-relative">
+                <img src="{{URL::to('img/bruce-mars.jpg')}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+              </div>
+            </div>
+            <div class="col-auto my-auto">
+              <div class="h-100">
+                <h5 class="mb-1">
+                  {{ Auth::user()->UserName ?? '' }}
+                </h5>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+
     <footer class="footer py-4  ">
       <div class="container-fluid">
         <div class="row align-items-center justify-content-lg-between">

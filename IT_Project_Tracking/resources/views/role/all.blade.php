@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('admin')
 
 @section('headTitle','Roles')
 @section('pageTitle','Roles - ')
@@ -58,23 +58,5 @@
         </div>
     </div>
 </div>
-
-@endsection
-
-
-@section('scripts')
-    @if (session('status'))
-        <script type="text/javascript">
-            iziToast.show({
-                titleColor: 'white',
-                messageColor: 'white',
-                icon:'fa-regular fa-circle-check',
-                iconColor: 'white',
-                backgroundColor: '#17c1e8',
-                message:"{{session('status')}}",
-                position: 'topRight'
-            });
-        </script>
-    @endif
 
 @endsection

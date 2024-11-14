@@ -12,7 +12,7 @@ class RequirementController extends Controller
     //Display all requirements
     public function all(){
 
-        $allRequirements = Requirement::all();
+        $allRequirements = Requirement::paginate(8);
         
         return view('requirement.all',['requirements' => $allRequirements]);
     }

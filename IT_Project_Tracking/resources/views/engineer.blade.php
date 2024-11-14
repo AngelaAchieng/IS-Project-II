@@ -141,7 +141,7 @@
                 </div>
               </a>
             </li>
-            <div class="ms-md-auto pe-md-3 d-flex align-items-center me-5 mt-3">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center me-3 mt-3">
               @if (Auth::check())
                 <p>Welcome, {{ Auth::user()->UserName }}</p> 
               @else

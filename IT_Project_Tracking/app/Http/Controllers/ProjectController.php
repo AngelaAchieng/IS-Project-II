@@ -12,7 +12,7 @@ class ProjectController extends Controller
     //Display all projects
     public function all(){
 
-        $allProjects = Project::all();
+        $allProjects = Project::paginate(8);
         
         return view('project.all',['projects' => $allProjects]);
     }

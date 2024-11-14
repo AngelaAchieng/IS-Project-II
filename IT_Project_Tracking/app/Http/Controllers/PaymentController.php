@@ -11,7 +11,7 @@ class PaymentController extends Controller
     //Display all payments
     public function all(){
 
-        $allPayments = Payment::all();
+        $allPayments = Payment::paginate(8);
         
         return view('payment.all',['payments' => $allPayments]);
     }

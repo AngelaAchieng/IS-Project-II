@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('admin')
 
 @section('headTitle','Users')
 @section('pageTitle','Users - ')
@@ -57,6 +57,8 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <div class="pagn-links">
+                    {{$users->links()}}
                 </div>
             </div>
         </div>

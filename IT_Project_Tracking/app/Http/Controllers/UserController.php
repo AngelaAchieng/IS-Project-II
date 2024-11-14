@@ -14,7 +14,7 @@ class UserController extends Controller
     //Display all users
     public function all(){
 
-        $allUsers = User::all();
+        $allUsers = User::paginate(8);
         
         return view('user.all',['users' => $allUsers]);
     }

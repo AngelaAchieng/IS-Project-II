@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('engineer')
 
 @section('headTitle','Projects')
 @section('pageTitle','Projects - ')
@@ -21,6 +21,7 @@
             </div>
 
             <div class="card-body px-0 pt-0 pb-1 text-center">
+                
                 <div class="table-responsive p-0">
                     <table class="table align-items-center mb-0">
                         <thead>
@@ -65,23 +66,12 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <div class="pagn-links">
+                    {{$projects->links()}}
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-@endsection
-
-@section('scripts')
-    @if(session('status'))
-        <script type="text/javascript">
-            iziToast.show({
-                icon: 'fa-solid fa-circle-check',
-                message: "{{session('status')}}",
-                position: 'topRight'
-            });
-        </script>
-    @endif
 
 @endsection

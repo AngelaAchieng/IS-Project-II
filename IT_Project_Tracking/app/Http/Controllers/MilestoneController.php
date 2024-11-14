@@ -11,7 +11,7 @@ class MilestoneController extends Controller
     //Display all milestone
     public function all(){
 
-        $allMilestones = Milestone::all();
+        $allMilestones = Milestone::paginate(8);
 
         return view('milestone.all',['milestones' => $allMilestones]);
         

@@ -4,77 +4,47 @@
 @section('pageTitle','Organizations - ')
 
 @section('content')
-
-<div class="row">
-    <div class='col-12'>
-
-        <div class="d-flex justify-content-end">
-            <a class="btn btn-dark" href="{{URL::to('organization/add')}}">
-                <i class="fas fa-plus"></i> Add Organization
-            </a>
-        </div>
-        <div class="card mb-4">
-            <div class="card-header p-0 position-relative mt-n2 mx-3 z-index-2">
-              <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Organizations table</h6>
-              </div>
-            </div>
-
-            <div class="card-body px-0 pt-0 pb-1 text-center">
-                <div class="table-responsive p-0">
-                    <table class="table align-items-center mb-0">
-                        <thead>
-                            <tr>
-                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >#</th>
-                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Organization Name</th>
-                                <th class="text-uppercase text-secondary text-s font-weight-bolder opacity-7" >Organization Description</th>
-                                <th class="align-middle text-center text-uppercase text-secondary text-s font-weight-bolder opacity-7">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($organizations as $organization)
-                            <tr>
-                                <td>{{$organization->Organization_id}}</td>
-                                <td>{{$organization->Organization_name}}</td>
-                                <td>{{$organization->Organization_description}}</td>
-                                <td class="align-middle text-center text-sm">
-                                    <a href="{{URL::to('organization/edit/'.$organization->Organization_id)}}">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <a onclick= "return confirm('Are you sure?')" href="{{URL::to('organization/delete/'.$organization->Organization_id)}}">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="4">No record</td>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+<section class="py-3 px-md-4">
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-dark" href="{{ URL::to('organization/add') }}">
+            <i class="fas fa-plus"></i> Add Organization
+        </a>
+    </div>
+    <div class="row mt-lg-4 mt-2">
+        @forelse($organizations as $organization)
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="d-flex mt-n2">
+                            <!-- Displaying Organization_id -->
+                            <div class="avatar avatar-xl bg-gradient-dark border-radius-xl p-2 mt-n4">
+                                <span class="text-white">{{ $organization->Organization_id }}</span>
+                            </div>
+                            <div class="ms-3 my-auto">
+                                <!-- Displaying Organization_name -->
+                                <h6 class="mb-0">{{ $organization->Organization_name }}</h6>
+                            </div>
+                            <div class="ms-auto">
+                                <div class="dropdown">
+                                    <button class="btn btn-link text-secondary ps-0 pe-2" id="navbarDropdownMenuLink{{ $organization->Organization_id }}" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v text-lg" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-end me-sm-n4 me-n3" aria-labelledby="navbarDropdownMenuLink{{ $organization->Organization_id }}">
+                                        <a class="dropdown-item" href="{{ URL::to('organization/edit/' . $organization->Organization_id) }}">Edit</a>
+                                        <a class="dropdown-item" onclick="return confirm('Are you sure?')" href="{{ URL::to('organization/delete/' . $organization->Organization_id) }}">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Displaying Organization_description -->
+                        <p class="text-sm mt-3">{{ $organization->Organization_description }}</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        @empty
+            <p>No organizations found.</p>
+        @endforelse
     </div>
-</div>
-
-@endsection
-
-@section('scripts')
-@section('scripts')
-    @if (session('status'))
-        <script type="text/javascript">
-            iziToast.show({
-                titleColor: 'white',
-                messageColor: 'white',
-                icon:'fa-regular fa-circle-check',
-                iconColor: 'white',
-                backgroundColor: '#17c1e8',
-                message:"{{session('status')}}",
-                position: 'topRight'
-            });
-        </script>
-    @endif
+</section>
 
 @endsection

@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('admin')
 
 @section('headTitle','Add Payment')
 @section('pageTitle','Add Payment - ')
