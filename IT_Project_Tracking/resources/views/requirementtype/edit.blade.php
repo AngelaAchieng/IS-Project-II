@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('engineer')
 
 @section('headTitle','Edit Requirement Type')
 @section('pageTitle','Edit Requirement Type - ')

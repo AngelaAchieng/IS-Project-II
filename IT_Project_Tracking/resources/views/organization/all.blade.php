@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('engineer')
 
 @section('headTitle','Organizations')
 @section('pageTitle','Organizations - ')
@@ -10,7 +10,7 @@
             <i class="fas fa-plus"></i> Add Organization
         </a>
     </div>
-    <div class="row mt-lg-4 mt-2">
+    <div class="row mt-lg-4 mt-2 mb-2">
         @forelse($organizations as $organization)
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card">

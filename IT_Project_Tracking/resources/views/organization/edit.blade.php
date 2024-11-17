@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('engineer')
 
 @section('headTitle','Edit Organization')
 @section('pageTitle','Edit Organization - ')

@@ -42,7 +42,7 @@
         <div class="container">
           <div class="row">
             <div class="col-xl-4 col-md-6 d-flex flex-column mx-auto">
-              <div class="card card-plain mt-8">
+              <div class="card card-plain mt-7">
                 <div class="card-header pb-0 text-left bg-transparent">
                   <h3 class="font-weight-black text-dark display-6">Next Technologies</h3>
                   <p class="mb-0">Welcome back! Please enter your details.</p>
@@ -79,12 +79,6 @@
                       </div>
                     </div>
                   </form>
-                </div>
-                <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                  <p class="mb-4 text-xs mx-auto">
-                    Don't have an account?
-                    <a href="javascript:;" class="text-dark font-weight-bold">Sign up</a>
-                  </p>
                 </div>
               </div>
             </div>

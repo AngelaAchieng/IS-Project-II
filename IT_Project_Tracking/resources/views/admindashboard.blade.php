@@ -191,7 +191,7 @@
                     <tr>
                       <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Project</th>
                       <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Engineer</th>
-                      <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Status</th>
+                      <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2 text-center">Status</th>
                       <th class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">Completion</th>
                     </tr>
                   </thead>
@@ -209,11 +209,13 @@
                             <p class="text-sm font-weight-bold mb-0"><?php echo $project['engineer']; ?></p>
                           </td>
                           <td class="align-middle text-center text-sm">
-                            <?php if ($project['project_status'] == 'Completed') { ?>
-                              <span class="badge badge-sm bg-gradient-success">Completed</span>
-                            <?php } else { ?>
-                              <span class="badge badge-sm bg-gradient-secondary">Pending</span>
-                            <?php } ?>
+                            <div class="d-flex align-items-center justify-content-center">
+                              <?php if ($project['project_status'] == 'Completed') { ?>
+                                <span class="badge badge-sm bg-gradient-success">Completed</span>
+                              <?php } else { ?>
+                                <span class="badge badge-sm bg-gradient-secondary">Pending</span>
+                              <?php } ?>
+                            </div>
                           </td>
                           <td class="align-middle text-center">
                             <div class="d-flex align-items-center justify-content-center">
