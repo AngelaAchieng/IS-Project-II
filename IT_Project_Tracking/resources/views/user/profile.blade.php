@@ -41,7 +41,7 @@
 </head>
 
 <body class="g-sidenav-show bg-gray-200">
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
@@ -49,83 +49,92 @@
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('admin')) ? 'active': ''}}" href="{{URL::to('admin')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="nav-icon fa-solid fa-window-maximize"></i>
-            </div>
-            <span class="nav-link-text ms-1">Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Manage</h6>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('role*')) ? 'active': ''}}" href="{{URL::to('roles')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fa-solid fa-user-gear"></i>
-            </div>
-            <span class="nav-link-text ms-1">Roles</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('user*')) ? 'active': ''}}" href="{{URL::to('users')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fas fa-users"></i>
-            </div>
-            <span class="nav-link-text ms-1">Users</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('organization*')) ? 'active': ''}}" href="{{URL::to('organizations')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fa-solid fa-sitemap"></i>
-            </div>
-            <span class="nav-link-text ms-1">Organizations</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('project*')) ? 'active': ''}}" href="{{URL::to('projects')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fa-solid fa-diagram-project"></i>
-            </div>
-            <span class="nav-link-text ms-1">Projects</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('requirementtype*')) ? 'active': ''}}" href="{{URL::to('requirementtypes')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fa-solid fa-diagram-project"></i>
-            </div>
-            <span class="nav-link-text ms-1">Requirement Types</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('requirements*')) ? 'active': ''}}" href="{{URL::to('requirements')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fa-solid fa-diagram-project"></i>
-            </div>
-            <span class="nav-link-text ms-1">Requirements</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('milestone*')) ? 'active': ''}}" href="{{URL::to('milestones')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-             <i class="fa-solid fa-diagram-project"></i>
-            </div>
-            <span class="nav-link-text ms-1">Milestones</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('payment*')) ? 'active': ''}}" href="{{URL::to('payments')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">receipt_long</i>
-            </div>
-            <span class="nav-link-text ms-1">Billing</span>
-          </a>
-        </li>
+            <a class="nav-link text-white {{ request()->is('admin') || request()->is('systemsengineer') || request()->is('technicalengineer') ? 'active' : '' }}" 
+              href="{{ Auth::user()->role == 'System Engineer' ? URL::to('systemengineer') : URL::to('technicalengineer') }}">
+                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="nav-icon fa-solid fa-window-maximize"></i>
+                </div>
+                <span class="nav-link-text ms-1">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item mt-3">
+              <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Manage</h6>
+          </li>
+
+          <!-- Admin Role -->
+          @if(Auth::user()->role->Role_name == 'Admin')
+              <li class="nav-item">
+                  <a class="nav-link text-white {{ (request()->is('role*')) ? 'active' : '' }}" href="{{ URL::to('roles') }}">
+                      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                          <i class="fa-solid fa-user-gear"></i>
+                      </div>
+                      <span class="nav-link-text ms-1">Roles</span>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link text-white {{ (request()->is('user*')) ? 'active' : '' }}" href="{{ URL::to('users') }}">
+                      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                          <i class="fas fa-users"></i>
+                      </div>
+                      <span class="nav-link-text ms-1">Users</span>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link text-white {{ (request()->is('payment*')) ? 'active' : '' }}" href="{{ URL::to('payments') }}">
+                      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                          <i class="material-icons opacity-10">receipt_long</i>
+                      </div>
+                      <span class="nav-link-text ms-1">Billing</span>
+                  </a>
+              </li>
+          @endif
+
+          <!-- System Engineer and Technical Engineer Roles -->
+          @if(in_array(Auth::user()->role->Role_name, ['System Engineer', 'Technical Engineer']))
+              <li class="nav-item">
+                  <a class="nav-link text-white {{ (request()->is('organization*')) ? 'active' : '' }}" href="{{ URL::to('organizations') }}">
+                      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                          <i class="fa-solid fa-sitemap"></i>
+                      </div>
+                      <span class="nav-link-text ms-1">Organizations</span>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link text-white {{ (request()->is('project*')) ? 'active' : '' }}" href="{{ URL::to('projects') }}">
+                      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                          <i class="fa-solid fa-diagram-project"></i>
+                      </div>
+                      <span class="nav-link-text ms-1">Projects</span>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link text-white {{ (request()->is('milestone*')) ? 'active' : '' }}" href="{{ URL::to('milestones') }}">
+                      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                          <i class="fa-solid fa-diagram-project"></i>
+                      </div>
+                      <span class="nav-link-text ms-1">Milestones</span>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link text-white {{ (request()->is('requirementtype*')) ? 'active' : '' }}" href="{{ URL::to('requirementtypes') }}">
+                      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                          <i class="fa-solid fa-diagram-project"></i>
+                      </div>
+                      <span class="nav-link-text ms-1">Requirement Types</span>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link text-white {{ (request()->is('requirements*')) ? 'active' : '' }}" href="{{ URL::to('requirements') }}">
+                      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                          <i class="fa-solid fa-diagram-project"></i>
+                      </div>
+                      <span class="nav-link-text ms-1">Requirements</span>
+                  </a>
+              </li>
+          @endif
       </ul>
     </div>
   </aside>

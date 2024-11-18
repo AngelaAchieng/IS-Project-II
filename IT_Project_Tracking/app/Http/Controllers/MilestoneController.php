@@ -5,17 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\Milestone;
+use Auth;
 
 class MilestoneController extends Controller
 {
     //Display all milestone
-    public function all(){
-
-        $allMilestones = Milestone::paginate(8);
-
-        return view('milestone.all',['milestones' => $allMilestones]);
-        
+    public function all()
+    {
+        if (Auth::check()) {
+            $user_id = Auth::id();
+    
+            // Fetch milestones associated with the user's projects
+            $allMilestones = Milestone::whereHas('project', function ($query) use ($user_id) {
+                $query->where('user_id', $user_id);
+            })->paginate(7);
+    
+            return view('milestone.all', ['milestones' => $allMilestones]);
+        }
+    
+        return redirect()->route('login')->with('error', 'You need to log in to access this page.');
     }
+    
 
     //Add a milestone
     public function add(){

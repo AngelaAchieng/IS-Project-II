@@ -33,7 +33,7 @@ class RequirementtypeController extends Controller
         $requirementtype->RequirementType_Name =$requirementtype_name;
         $requirementtype->save();
 
-        return redirect('requirementtypes')->with('status',"$requirementtype_name successfully added");
+        return redirect('requirementtypes')->with('success',"$requirementtype_name successfully added");
     }
 
     //Make changes
@@ -61,7 +61,7 @@ class RequirementtypeController extends Controller
         if($requirementtype){
             $requirementtype->RequirementType_Name =$requirementtype_name;
             $requirementtype->save();
-            return redirect('requirementtypes')->with('status',"$requirementtype_name updated");
+            return redirect('requirementtypes')->with('success',"$requirementtype_name updated");
         }else{
             return redirect('requirementtypes');
         }

@@ -54,7 +54,7 @@
                     <div class="mb-3">
                         <input value="{{old('Email') ?? ""}}"  type="Email" class="form-control  @error('Email') is-invalid @enderror" name="Email" placeholder="Enter email" aria-label="Email" aria-describedby="email-addon">
                         <div class="invalid-feedback">
-                            @error('Email') {{$message}} @enderror
+                          @error('Email') {{$message}} @enderror
                         </div>
                       </div>
                     <label>Password</label>

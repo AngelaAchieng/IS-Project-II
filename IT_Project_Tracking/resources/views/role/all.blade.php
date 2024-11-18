@@ -6,8 +6,7 @@
 @section('content')
 
 <div class="row">
-    <div class='col-12'>
-
+    <div class='col-12 '>
         <div class="d-flex justify-content-center">
             <a class="btn btn-dark" href="{{URL::to('role/add')}}">
                 <i class="fas fa-plus"></i> Add Role

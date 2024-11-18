@@ -289,7 +289,7 @@
     $query = $con->query("
       SELECT 
         COUNT(`Project_id`) AS pending, 
-        MONTHNAME(`EndDate`) AS monthname,
+        MONTHNAME(`StartDate`) AS monthname,
         MONTH(`EndDate`) AS month_number
       FROM `projects` 
       WHERE `Status` = 'Pending'

@@ -6,16 +6,25 @@ use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\User;
+use Auth;
 
 class ProjectController extends Controller
 {
     //Display all projects
-    public function all(){
-
-        $allProjects = Project::paginate(8);
-        
-        return view('project.all',['projects' => $allProjects]);
+    public function all()
+    {
+        if (Auth::check()) {
+            $user_id = Auth::id();
+    
+            // Fetch projects for the logged-in user
+            $userProjects = Project::where('user_id', $user_id)->paginate(7);
+    
+            return view('project.all', ['projects' => $userProjects]);
+        }
+    
+        return redirect()->route('login')->with('error', 'You need to log in to access this page.');
     }
+    
 
     //Add a project
     public function add(){
@@ -31,6 +40,7 @@ class ProjectController extends Controller
             'project_name'=> 'min:4',
             'project_description' => 'min:5',
             'status' => 'required',
+            'end_date' => 'nullable|date',
             'User_id' => 'required',
             'Organization_id' => 'required'
         ]);
@@ -80,6 +90,7 @@ class ProjectController extends Controller
             'project_name'=> 'min:4',
             'project_description' => 'min:5',
             'status' => 'required',
+            'end_date' => 'nullable|date',
             'User_id' => 'required',
             'Organization_id' => 'required'
         ]);

@@ -29,7 +29,7 @@
       <div class="card-header p-0 position-relative mt-n3 mx-2 z-index-2 bg-transparent">
         <div class="bg-gradient-white border-radius-lg py-2 px-1">
           <div class="chart">
-            <canvas id="chart-line" class="chart-canvas" height="240"></canvas>
+            <canvas id="chart-bars1" class="chart-canvas" height="240"></canvas>
           </div>
         </div>
       </div>
@@ -41,102 +41,76 @@
   </div>
 </div>
 
-      
-    <?php
-        session_start();
+@if (Auth::check())
+<?php
+    $user_id = Auth::id();
 
-        // Initialize variables
-        $completed = [];
-        $month = [];
-        $pending = [];
-        $month1 = [];
+    // Get completed projects data, ordered by month numerically
+    $completed = DB::select("
+        SELECT COUNT(Project_id) as completed, MONTHNAME(EndDate) as monthname, MONTH(EndDate) as monthnumber
+        FROM projects
+        WHERE Status = 'Completed' AND user_id = :user_id
+        GROUP BY MONTH(EndDate), MONTHNAME(EndDate)
+        ORDER BY monthnumber ASC
+    ", ['user_id' => $user_id]);
 
-        // Ensure the session variable exists
-        if (isset($_SESSION['user_id'])) {
-            $user_id = $_SESSION['user_id'];
-            $con = new mysqli('localhost', 'root', '', 'project_tracking');
+    // Get pending projects data, ordered by month numerically
+    $pending = DB::select("
+        SELECT COUNT(Project_id) as pending, MONTHNAME(EndDate) as monthname, MONTH(EndDate) as monthnumber
+        FROM projects
+        WHERE Status = 'Pending' AND user_id = :user_id
+        GROUP BY MONTH(EndDate), MONTHNAME(EndDate)
+        ORDER BY monthnumber ASC
+    ", ['user_id' => $user_id]);
+?>
 
-            // Completed projects query for the logged-in user
-            $query = $con->query("
-                SELECT 
-                    COUNT(`Project_id`) AS completed, 
-                    MONTHNAME(`EndDate`) AS monthname 
-                FROM `projects` 
-                WHERE `Status` = 'Completed' AND `user_id` = $user_id
-                GROUP BY monthname
-            ");
 
-            $completed = [];
-            $month = [];
-
-            foreach ($query as $data) {
-                $completed[] = $data['completed'];
-                $month[] = $data['monthname'];
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Bar Chart for Completed Projects
+        const ctx = document.getElementById("chart-bars").getContext("2d");
+        const myChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: @json(array_column($completed, 'monthname')), // Month names for labels
+                datasets: [{
+                    label: "Completed",
+                    backgroundColor: "rgba(75, 192, 192, 0.6)",
+                    data: @json(array_column($completed, 'completed')), // Completed project counts
+                    maxBarThickness: 100,
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
             }
+        });
 
-            // Pending projects query for the logged-in user
-            $query = $con->query("
-                SELECT 
-                    COUNT(`Project_id`) AS pending, 
-                    MONTHNAME(`EndDate`) AS monthname 
-                FROM `projects` 
-                WHERE `Status` = 'Pending' AND `u ser_id` = $user_id
-                GROUP BY monthname
-            ");
-
-            foreach ($query as $data) {
-                $pending[] = $data['pending'];
-                $month1[] = $data['monthname'];
+        // Bar Chart for Pending Projects (Pink Bar Chart)
+        var ctx1 = document.getElementById("chart-bars1").getContext("2d");
+        new Chart(ctx1, {
+            type: "bar",  
+            data: {
+                labels: @json(array_column($pending, 'monthname')), // Month names for labels
+                datasets: [{
+                    label: "Pending",
+                    backgroundColor: "rgba(255, 105, 180, 0.7)",  
+                    borderColor: "rgba(255, 105, 180, 1)",  
+                    borderWidth: 1,
+                    data: @json(array_column($pending, 'pending')), // Pending project counts
+                    maxBarThickness: 100,
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
             }
+        });
+    </script>
+@endif
 
-            $con->close();
-        }
-    ?>
-
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    // Bar Chart for Completed Projects
-    const ctx = document.getElementById("chart-bars").getContext("2d");
-    const myChart = new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: <?php echo json_encode($month)?>,
-        datasets: [{
-          label: "Completed",
-          backgroundColor: "rgba(75, 192, 192, 0.6)",
-          data: <?php echo json_encode($completed)?>,
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: { beginAtZero: true }
-        }
-      }
-    });
-
-    // Line Chart for Pending Projects
-    var ctx1 = document.getElementById("chart-line").getContext("2d");
-    new Chart(ctx1, {
-      type: "line",
-      data: {
-        labels: <?php echo json_encode($month1)?>,
-        datasets: [{
-          label: "Pending",
-          borderColor: "rgba(255, 99, 132, 1)",
-          backgroundColor: "rgba(255, 99, 132, 0.2)",
-          fill: true,
-          data: <?php echo json_encode($pending)?>
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: { beginAtZero: true }
-        }
-      }
-    });
-
-</script>
 @endsection

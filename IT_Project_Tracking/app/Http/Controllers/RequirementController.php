@@ -6,16 +6,27 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Models\Requirement;
 use App\Models\RequirementType;
+use Auth;
 
 class RequirementController extends Controller
 {
     //Display all requirements
-    public function all(){
-
-        $allRequirements = Requirement::paginate(8);
-        
-        return view('requirement.all',['requirements' => $allRequirements]);
+    public function all()
+    {
+        if (Auth::check()) {
+            $user_id = Auth::id();
+    
+            // Fetch requirements for projects belonging to the logged-in user
+            $allRequirements = Requirement::whereHas('projects', function ($query) use ($user_id) {
+                $query->where('user_id', $user_id);
+            })->paginate(7);
+    
+            return view('requirement.all', ['requirements' => $allRequirements]);
+        }
+    
+        return redirect()->route('login')->with('error', 'You need to log in to access this page.');
     }
+    
 
     //Add a requirement
     public function add(){
