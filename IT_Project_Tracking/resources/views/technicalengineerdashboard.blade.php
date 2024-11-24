@@ -56,10 +56,10 @@
 
     // Get pending projects data, ordered by month numerically
     $pending = DB::select("
-        SELECT COUNT(Project_id) as pending, MONTHNAME(EndDate) as monthname, MONTH(EndDate) as monthnumber
+        SELECT COUNT(Project_id) as pending, MONTHNAME(StartDate) as monthname, MONTH(StartDate) as monthnumber
         FROM projects
         WHERE Status = 'Pending' AND user_id = :user_id
-        GROUP BY MONTH(EndDate), MONTHNAME(EndDate)
+        GROUP BY MONTH(StartDate), MONTHNAME(StartDate)
         ORDER BY monthnumber ASC
     ", ['user_id' => $user_id]);
 ?>

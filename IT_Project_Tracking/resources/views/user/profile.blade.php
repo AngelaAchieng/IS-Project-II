@@ -53,7 +53,7 @@
       <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link text-white {{ request()->is('admin') || request()->is('systemsengineer') || request()->is('technicalengineer') ? 'active' : '' }}" 
-              href="{{ Auth::user()->role == 'System Engineer' ? URL::to('systemengineer') : URL::to('technicalengineer') }}">
+              href="{{ Auth::user()->role == 'Systems Engineer' ? URL::to('systemsengineer') : URL::to('technicalengineer') }}">
                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="nav-icon fa-solid fa-window-maximize"></i>
                 </div>
@@ -93,7 +93,7 @@
           @endif
 
           <!-- System Engineer and Technical Engineer Roles -->
-          @if(in_array(Auth::user()->role->Role_name, ['System Engineer', 'Technical Engineer']))
+          @if(in_array(Auth::user()->role->Role_name, ['Systems Engineer', 'Technical Engineer']))
               <li class="nav-item">
                   <a class="nav-link text-white {{ (request()->is('organization*')) ? 'active' : '' }}" href="{{ URL::to('organizations') }}">
                       <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">

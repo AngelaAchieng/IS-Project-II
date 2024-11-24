@@ -260,50 +260,50 @@
     ?>
 
     <?php
-    $con = new mysqli('localhost', 'root', '', 'project_tracking');
+      $con = new mysqli('localhost', 'root', '', 'project_tracking');
 
-    $query = $con->query("
-      SELECT 
-        COUNT(`Project_id`) AS completed, 
-        MONTHNAME(`EndDate`) AS monthname,
-        MONTH(`EndDate`) AS month_number
-      FROM `projects` 
-      WHERE `Status` = 'Completed'
-      GROUP BY month_number, monthname
-      ORDER BY month_number
-    ");
+      $query = $con->query("
+        SELECT 
+          COUNT(`Project_id`) AS completed, 
+          MONTHNAME(`EndDate`) AS monthname,
+          MONTH(`EndDate`) AS month_number
+        FROM `projects` 
+        WHERE `Status` = 'Completed'
+        GROUP BY month_number, monthname
+        ORDER BY month_number
+      ");
 
-    $completed = [];
-    $month = [];
+      $completed = [];
+      $month = [];
 
-    foreach ($query as $data) {
-        $completed[] = $data['completed'];
-        $month[] = $data['monthname'];
-    }
+      foreach ($query as $data) {
+          $completed[] = $data['completed'];
+          $month[] = $data['monthname'];
+      }
     ?>
 
 
     <?php
-    $con = new mysqli('localhost', 'root', '', 'project_tracking');
+      $con = new mysqli('localhost', 'root', '', 'project_tracking');
 
-    $query = $con->query("
-      SELECT 
-        COUNT(`Project_id`) AS pending, 
-        MONTHNAME(`StartDate`) AS monthname,
-        MONTH(`EndDate`) AS month_number
-      FROM `projects` 
-      WHERE `Status` = 'Pending'
-      GROUP BY month_number, monthname
-      ORDER BY month_number
-    ");
+      $query = $con->query("
+        SELECT 
+          COUNT(`Project_id`) AS pending, 
+          MONTHNAME(`StartDate`) AS monthname,
+          MONTH(`StartDate`) AS month_number
+        FROM `projects` 
+        WHERE `Status` = 'Pending'
+        GROUP BY month_number, monthname
+        ORDER BY month_number
+      ");
 
-    $pending = [];
-    $month1 = [];
+      $pending = [];
+      $month1 = [];
 
-    foreach ($query as $data) {
-        $pending[] = $data['pending'];
-        $month1[] = $data['monthname'];
-    }
+      foreach ($query as $data) {
+          $pending[] = $data['pending'];
+          $month1[] = $data['monthname'];
+      }
     ?>
 
 

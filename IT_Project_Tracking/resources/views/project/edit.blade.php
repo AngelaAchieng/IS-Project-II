@@ -38,7 +38,7 @@
                         <div class="col-6 mb-2">
                             <div class="input-group input-group-static">
                                 <label>End Date</label>
-                                <input type='date' value="{{$project->EndDate}}" required name="end_date" class="form-control">
+                                <input type='date' value="{{$project->EndDate}}" name="end_date" class="form-control">
                             </div>
                         </div>
                     </div>
