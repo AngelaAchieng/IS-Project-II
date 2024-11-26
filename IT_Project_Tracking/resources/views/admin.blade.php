@@ -79,6 +79,14 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link text-white {{(request() ->is('organization*')) ? 'active': ''}}" href="{{URL::to('organizations')}}">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fa-solid fa-building"></i>
+            </div>
+            <span class="nav-link-text ms-1">Organizations</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link text-white {{(request() ->is('payment*')) ? 'active': ''}}" href="{{URL::to('payments')}}">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>

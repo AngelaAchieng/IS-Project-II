@@ -50,10 +50,16 @@
                             </select>
                         </div>
                         <div class="col-6 mt-4">
-                            <label >Status</label>
-                            <div class="input-group input-group-outline mb-3">
-                                <label class="form-label">Enter Status</label>
-                                <input type='string' required name="mstatus" class="form-control">
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="status[]" id="completed" value="Completed">
+                                    <label class="form-check-label" for="completed">Completed</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="status[]" id="pending" value="Pending">
+                                    <label class="form-check-label" for="pending">Pending</label>
+                                </div>
                             </div>
                         </div>
                     </div>

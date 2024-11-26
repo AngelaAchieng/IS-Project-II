@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                             <div class="ms-auto text-end">
-                                <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="{{URL::to('project/delete/'.$project->Project_id)}}"><i class="material-icons text-sm me-2">delete</i>Delete</a>
+                                <a class="btn btn-link text-danger text-gradient px-3 mb-0" onclick="return confirm('Are you sure?')" href="{{URL::to('project/delete/'.$project->Project_id)}}"><i class="material-icons text-sm me-2">delete</i>Delete</a>
                                 <a class="btn btn-link text-dark px-3 mb-0" href="{{URL::to('project/edit/'.$project->Project_id)}}"><i class="material-icons text-sm me-2">edit</i>Edit</a>
                             </div>
                         </li>

@@ -30,6 +30,7 @@
                             <th class="text-uppercase text-secondary text-sm font-weight-bold opacity-8">Status</th>
                             <th class="text-uppercase text-secondary text-sm font-weight-bold opacity-8">Amount</th>
                             <th class="text-uppercase text-secondary text-sm font-weight-bold opacity-8">Project Name</th>
+                            <th class="text-uppercase text-secondary text-sm font-weight-bold opacity-8">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,6 +56,11 @@
                                     <span class="text-sm text-secondary">
                                         {{ $payment->project->Project_name }}
                                     </span>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <a href="{{URL::to('payment/edit/'.$payment->Payment_id)}}">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @empty

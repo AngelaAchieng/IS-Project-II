@@ -20,7 +20,7 @@
                     <label class="mt-3">Project Amount</label>
                     <div class="input-group input-group-outline mb-4">
                         <label class="form-label">Enter Amount</label>
-                        <input type='integer' required name="project_amount" class="form-control">
+                        <input type='integer' pattern="^\d+$" title="Please enter an integer value." required name="project_amount" class="form-control">
                     </div>
                     <label>Project</label>
                         <select name="Project_id" id="Project_id" class="form-control">

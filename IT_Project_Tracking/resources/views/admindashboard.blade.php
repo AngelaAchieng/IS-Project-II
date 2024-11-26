@@ -7,70 +7,171 @@
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          @php
+            use Carbon\Carbon;
+
+            // Get the current month and year
+            $currentMonth = Carbon::now()->month;
+            $currentYear = Carbon::now()->year;
+
+            // Fetch payments for the current month
+            $currentMonthPayments = DB::table('payments')
+                ->whereMonth('Date', $currentMonth)
+                ->whereYear('Date', $currentYear)
+                ->pluck('Project_amount')
+                ->toArray();
+            
+            $currentMonthSum = array_sum($currentMonthPayments);
+
+            // Fetch payments for the previous month
+            $previousMonth = Carbon::now()->subMonth()->month;
+            $previousMonthPayments = DB::table('payments')
+                ->whereMonth('Date', $previousMonth)
+                ->whereYear('Date', $currentYear)
+                ->pluck('Project_amount')
+                ->toArray();
+
+            $previousMonthSum = array_sum($previousMonthPayments);
+
+            // Calculate the percentage change
+            $percentageChange = 0;
+            if ($previousMonthSum > 0) {
+                $percentageChange = (($currentMonthSum - $previousMonthSum) / $previousMonthSum) * 100;
+            }
+          @endphp
           <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">money</i>
+              <div class="card-header p-3 pt-2">
+                  <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                      <i class="material-icons opacity-10">money</i>
+                  </div>
+                  <div class="text-end pt-1">
+                      <p class="text-sm mb-0 text-capitalize">Monthly Money</p>
+                      <h4 class="mb-0">KES {{ number_format($currentMonthSum, 2) }}</h4>
+                  </div>
               </div>
-              <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Weekly Money</p>
-                @php
-                  $Project_amount = DB::table('payments')->pluck('Project_amount')->toArray();  // Fetch project amounts as an array
-                  $paymentsum = array_sum($Project_amount);  // Sum the project amounts
-                @endphp
-
-                <h4 class="mb-0">KES {{ $paymentsum }}</h4>
-
+              <hr class="dark horizontal my-0">
+              <div class="card-footer p-3">
+                  <p class="mb-0">
+                      @if($percentageChange > 0)
+                          <span class="text-success text-sm font-weight-bolder">+{{ number_format($percentageChange, 2) }}%</span> than last month
+                      @elseif($percentageChange < 0)
+                          <span class="text-danger text-sm font-weight-bolder">{{ number_format($percentageChange, 2) }}%</span> than last month
+                      @else
+                          <span class="text-muted text-sm">No change from last month</span>
+                      @endif
+                  </p>
               </div>
-            </div>
-            <hr class="dark horizontal my-0">
-            <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last week</p>
-            </div>
           </div>
         </div>
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">money</i>
-              </div>
-              <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Today's Expenses</p>
-                @php
-                  $UnitPrice = DB::table('requirements')->pluck('UnitPrice')->toArray();  //Fetch unit price as an array
-                  $requirementsum = array_sum($UnitPrice);  //Sum the unit price
-                @endphp
+          @php
+            use Carbon\Carbon as CarbonInstance; 
 
-                <h4 class="mb-0">KES {{ $requirementsum }}</h4>
+            // Get the current month and year
+            $currentMonth = CarbonInstance::now()->month;
+            $currentYear = CarbonInstance::now()->year;
+
+            // Fetch expenses (unit prices) for the current month based on the project start date
+            $currentMonthExpenses = DB::table('requirements')
+                ->join('projects', 'requirements.project_id', '=', 'projects.project_id')
+                ->whereMonth('projects.StartDate', $currentMonth)
+                ->whereYear('projects.StartDate', $currentYear)
+                ->pluck('requirements.UnitPrice')
+                ->toArray();
+
+            $currentMonthSum = array_sum($currentMonthExpenses);
+
+            // Fetch expenses for the previous month
+            $previousMonth = Carbon::now()->subMonth()->month;
+            $previousMonthExpenses = DB::table('requirements')
+                ->join('projects', 'requirements.project_id', '=', 'projects.project_id')
+                ->whereMonth('projects.StartDate', $previousMonth)
+                ->whereYear('projects.StartDate', $currentYear)
+                ->pluck('requirements.UnitPrice')
+                ->toArray();
+
+            $previousMonthSum = array_sum($previousMonthExpenses);
+
+            // Calculate the percentage change
+            $percentageChange = 0;
+            if ($previousMonthSum > 0) {
+                $percentageChange = (($currentMonthSum - $previousMonthSum) / $previousMonthSum) * 100;
+            }
+          @endphp
+          <div class="card">
+              <div class="card-header p-3 pt-2">
+                  <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                      <i class="material-icons opacity-10">money</i>
+                  </div>
+                  <div class="text-end pt-1">
+                      <p class="text-sm mb-0 text-capitalize">Monthly Expenses</p>
+                      <h4 class="mb-0">KES {{ number_format($currentMonthSum, 2) }}</h4>
+                  </div>
               </div>
-            </div>
-            <hr class="dark horizontal my-0">
-            <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last week</p>
-            </div>
+              <hr class="dark horizontal my-0">
+              <div class="card-footer p-3">
+                  <p class="mb-0">
+                      @if($percentageChange > 0)
+                          <span class="text-success text-sm font-weight-bolder">+{{ number_format($percentageChange, 2) }}%</span> than last month
+                      @elseif($percentageChange < 0)
+                          <span class="text-danger text-sm font-weight-bolder">{{ number_format($percentageChange, 2) }}%</span> than last month
+                      @else
+                          <span class="text-muted text-sm">No change from last month</span>
+                      @endif
+                  </p>
+              </div>
           </div>
         </div>
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">event</i>
-              </div>
-              <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Monthly Projects</p>
-                @php
-                  $Project_id = DB::table('projects')->pluck('Project_id')->toArray();  //Fetch project IDs as an array
-                  $projectcount = count($Project_id);  //Count the project IDs
-                @endphp
+          @php
+            use Carbon\Carbon as CustomCarbon; 
 
-                <h4 class="mb-0">{{ $projectcount }}</h4>
+            // Get the current month and year
+            $currentMonth = CustomCarbon::now()->month;
+            $currentYear = CustomCarbon::now()->year;
+
+            // Fetch the count of projects for the current month based on the start date
+            $currentMonthProjectCount = DB::table('projects')
+                ->whereMonth('StartDate', $currentMonth)
+                ->whereYear('StartDate', $currentYear)
+                ->count();
+
+            // Fetch the count of projects for the previous month
+            $previousMonth = CustomCarbon::now()->subMonth()->month;
+            $previousMonthProjectCount = DB::table('projects')
+                ->whereMonth('StartDate', $previousMonth)
+                ->whereYear('StartDate', $currentYear)
+                ->count();
+
+            // Calculate the percentage change
+            $percentageChange = 0;
+            if ($previousMonthProjectCount > 0) {
+                $percentageChange = (($currentMonthProjectCount - $previousMonthProjectCount) / $previousMonthProjectCount) * 100;
+            }
+          @endphp
+
+          <div class="card">
+              <div class="card-header p-3 pt-2">
+                  <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                      <i class="material-icons opacity-10">event</i>
+                  </div>
+                  <div class="text-end pt-1">
+                      <p class="text-sm mb-0 text-capitalize">Monthly Projects</p>
+                      <h4 class="mb-0">{{ $currentMonthProjectCount }}</h4>
+                  </div>
               </div>
-            </div>
-            <hr class="dark horizontal my-0">
-            <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">-2%</span> than yesterday</p>
-            </div>
+              <hr class="dark horizontal my-0">
+              <div class="card-footer p-3">
+                  <p class="mb-0">
+                      @if($percentageChange > 0)
+                          <span class="text-success text-sm font-weight-bolder">+{{ number_format($percentageChange, 2) }}%</span> than last month
+                      @elseif($percentageChange < 0)
+                          <span class="text-danger text-sm font-weight-bolder">{{ number_format($percentageChange, 2) }}%</span> than last month
+                      @else
+                          <span class="text-muted text-sm">No change from last month</span>
+                      @endif
+                  </p>
+              </div>
           </div>
         </div>
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">

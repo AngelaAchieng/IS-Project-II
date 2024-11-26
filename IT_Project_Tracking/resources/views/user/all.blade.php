@@ -16,7 +16,7 @@
         <div class="card p-3 h-100">
             <!-- User Picture -->
             <div class="card-header mx-auto p-3 text-center position-relative">
-                <img src="{{URL::to('img/bruce-mars.jpg')}}" 
+                <img src="{{URL::to('img/user.png')}}" 
                      alt="User Picture" 
                      class="rounded-circle img-fluid shadow" 
                      style="width: 100px; height: 100px; object-fit: cover;">

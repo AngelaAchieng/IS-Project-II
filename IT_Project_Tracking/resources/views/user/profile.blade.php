@@ -51,9 +51,23 @@
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
       <ul class="navbar-nav">
-        <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link text-white {{ request()->is('admin') || request()->is('systemsengineer') || request()->is('technicalengineer') ? 'active' : '' }}" 
-              href="{{ Auth::user()->role == 'Systems Engineer' ? URL::to('systemsengineer') : URL::to('technicalengineer') }}">
+              href="
+                  @php
+                      // Fetch the role name based on the logged-in user's role_id
+                      $role = App\Models\Role::find(Auth::user()->role_id);
+                      $roleName = $role ? $role->Role_Name : ''; 
+                  @endphp
+
+                  @if ($roleName == 'Systems Engineer')
+                      {{ URL::to('systemsengineer') }}
+                  @elseif ($roleName == 'Technical Engineer')
+                      {{ URL::to('technicalengineer') }}
+                  @else ($roleName == 'Admin')
+                      {{ URL::to('admin') }}
+                  @endif
+              ">
                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="nav-icon fa-solid fa-window-maximize"></i>
                 </div>
@@ -83,6 +97,14 @@
                   </a>
               </li>
               <li class="nav-item">
+                  <a class="nav-link text-white {{ (request()->is('organization*')) ? 'active' : '' }}" href="{{ URL::to('organizations') }}">
+                      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                          <i class="fa-solid fa-sitemap"></i>
+                      </div>
+                      <span class="nav-link-text ms-1">Organizations</span>
+                  </a>
+              </li>
+              <li class="nav-item">
                   <a class="nav-link text-white {{ (request()->is('payment*')) ? 'active' : '' }}" href="{{ URL::to('payments') }}">
                       <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                           <i class="material-icons opacity-10">receipt_long</i>
@@ -94,14 +116,6 @@
 
           <!-- System Engineer and Technical Engineer Roles -->
           @if(in_array(Auth::user()->role->Role_name, ['Systems Engineer', 'Technical Engineer']))
-              <li class="nav-item">
-                  <a class="nav-link text-white {{ (request()->is('organization*')) ? 'active' : '' }}" href="{{ URL::to('organizations') }}">
-                      <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                          <i class="fa-solid fa-sitemap"></i>
-                      </div>
-                      <span class="nav-link-text ms-1">Organizations</span>
-                  </a>
-              </li>
               <li class="nav-item">
                   <a class="nav-link text-white {{ (request()->is('project*')) ? 'active' : '' }}" href="{{ URL::to('projects') }}">
                       <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">

@@ -42,10 +42,29 @@
                             </div>
                         </div>
                     </div>
-                        <label >Status</label>
-                        <div class="input-group input-group-outline mb-3">
-                            <input type='string' value="{{$project->Status}}" required name="status" class="form-control">
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <div class="form-check">
+                            <input 
+                                class="form-check-input" 
+                                type="checkbox" 
+                                name="status[]" 
+                                id="completed" 
+                                value="Completed" 
+                                {{ in_array('Completed', explode(', ', $project->Status)) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="completed">Completed</label>
                         </div>
+                        <div class="form-check">
+                            <input 
+                                class="form-check-input" 
+                                type="checkbox" 
+                                name="status[]" 
+                                id="pending" 
+                                value="Pending" 
+                                {{ in_array('Pending', explode(', ', $project->Status)) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="pending">Pending</label>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-6 mt-1">
                             <label>User</label>

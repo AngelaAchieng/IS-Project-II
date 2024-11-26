@@ -34,40 +34,48 @@ class ProjectController extends Controller
     }
 
     //Save a project
-    public function save(Request $request){
-
+    public function save(Request $request)
+    {
+        // Validate the incoming request
         $this->validate($request, [
-            'project_name'=> 'min:4',
-            'project_description' => 'min:5',
-            'status' => 'required',
+            'project_name' => 'required|min:4',
+            'project_description' => 'required|min:5',
+            'status' => 'required|array', // Ensure 'status' is an array
             'end_date' => 'nullable|date',
-            'User_id' => 'required',
-            'Organization_id' => 'required'
+            'User_id' => 'required|integer',
+            'Organization_id' => 'required|integer'
         ]);
-
+    
+        // Retrieve the validated inputs
         $project_name = $request->get('project_name');
         $project_description = $request->get('project_description');
         $project_proposal = $request->get('project_proposal');
         $project_startdate = $request->get('start_date');
         $project_enddate = $request->get('end_date');
-        $project_status = $request->get('status');
+        $project_status = $request->get('status'); // This is an array
         $project_userid = $request->get('User_id');
         $project_organizationid = $request->get('Organization_id');
-
-
+    
+        // Convert the status array into a string for saving
+        $status_string = implode(', ', $project_status);
+    
+        // Create a new Project instance and assign the fields
         $project = new Project();
-        $project->Project_name =$project_name;
-        $project->Project_description =$project_description;
-        $project->Project_proposal =$project_proposal;
-        $project->StartDate =$project_startdate;
-        $project->EndDate =$project_enddate;
-        $project->Status =$project_status;
-        $project->user_id =$project_userid;
-        $project->organization_id =$project_organizationid;
+        $project->Project_name = $project_name;
+        $project->Project_description = $project_description;
+        $project->Project_proposal = $project_proposal;
+        $project->StartDate = $project_startdate;
+        $project->EndDate = $project_enddate;
+        $project->Status = $status_string; // Save the concatenated status
+        $project->user_id = $project_userid;
+        $project->organization_id = $project_organizationid;
+    
+        // Save the project to the database
         $project->save();
-
-        return redirect('projects')->with('success','Project successfully added');
-    }
+    
+        // Redirect with a success message
+        return redirect('projects')->with('success', 'Project successfully added');
+    }    
 
     //Make changes
     public function edit($Project_id){
@@ -89,7 +97,7 @@ class ProjectController extends Controller
         $this->validate($request, [
             'project_name'=> 'min:4',
             'project_description' => 'min:5',
-            'status' => 'required',
+            'status' => 'required|array',
             'end_date' => 'nullable|date',
             'User_id' => 'required',
             'Organization_id' => 'required'
@@ -104,6 +112,9 @@ class ProjectController extends Controller
         $project_userid = $request->get('User_id');
         $project_organizationid = $request->get('Organization_id');
 
+        // Convert the status array into a string for saving
+        $status_string = implode(', ', $project_status);
+
         $project = Project::find($Project_id);
 
         if($project){
@@ -112,7 +123,7 @@ class ProjectController extends Controller
             $project->Project_proposal =$project_proposal;
             $project->StartDate =$project_startdate;
             $project->EndDate =$project_enddate;
-            $project->Status =$project_status;
+            $project->Status = $status_string;
             $project->user_id =$project_userid;
             $project->organization_id =$project_organizationid;
             $project->save();

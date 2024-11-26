@@ -29,12 +29,12 @@
                     <label>Requirement Quantity</label>
                     <div class="input-group input-group-outline mb-4">
                         <label class="form-label">Enter Quantity</label>
-                        <input type='integer' required name="requirement_quantity" class="form-control">
+                        <input type='integer' pattern="^\d+$" title="Please enter an integer value." required name="requirement_quantity" class="form-control">
                     </div>
                     <label>Unit Price</label>
                     <div class="input-group input-group-outline mb-4">
                         <label class="form-label">Enter Price</label>
-                        <input type='integer' required name="unit_price" class="form-control">
+                        <input type='integer' pattern="^\d+$" title="Please enter an integer value." required name="unit_price" class="form-control">
                     </div>
                     <div class="row">
                         <div class="col-6">

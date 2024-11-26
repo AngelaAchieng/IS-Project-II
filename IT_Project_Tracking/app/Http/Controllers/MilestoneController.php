@@ -38,6 +38,7 @@ class MilestoneController extends Controller
 
         $this->validate($request, [
             'description'=> 'min:5',
+            'status' => 'required|array',
             'Project_id' => 'required'
         ]);
 
@@ -45,15 +46,18 @@ class MilestoneController extends Controller
         $milestone_duration = $request->get('duration');
         $milestone_startdate = $request->get('mstart_date');
         $milestone_enddate = $request->get('mend_date');
-        $milestone_status = $request->get('mstatus');
+        $milestone_status = $request->get('status');
         $milestone_projectid = $request->get('Project_id');
+
+        // Convert the status array into a string for saving
+        $status_string = implode(', ', $milestone_status);
 
         $milestone = new Milestone();
         $milestone->Milestone_description =$milestone_description;
         $milestone->Milestone_duration =$milestone_duration;
         $milestone->Start_Date =$milestone_startdate;
         $milestone->End_Date =$milestone_enddate;
-        $milestone->Status =$milestone_status;
+        $milestone->Status =$status_string;
         $milestone->project_id =$milestone_projectid;
         $milestone->save();
 
@@ -78,6 +82,7 @@ class MilestoneController extends Controller
 
         $this->validate($request, [
             'description'=> 'min:5',
+            'status' => 'required|array',
             'Project_id' => 'required'
         ]);
         
@@ -85,8 +90,11 @@ class MilestoneController extends Controller
         $milestone_duration = $request->get('duration');
         $milestone_startdate = $request->get('mstart_date');
         $milestone_enddate = $request->get('mend_date');
-        $milestone_status = $request->get('mstatus');
+        $milestone_status = $request->get('status');
         $milestone_projectid = $request->get('Project_id');
+
+        // Convert the status array into a string for saving
+        $status_string = implode(', ', $milestone_status);
         
         $milestone = Milestone::find($Milestone_id);
 
@@ -95,7 +103,7 @@ class MilestoneController extends Controller
             $milestone->Milestone_duration =$milestone_duration;
             $milestone->Start_Date =$milestone_startdate;
             $milestone->End_Date =$milestone_enddate;
-            $milestone->Status =$milestone_status;
+            $milestone->Status =$status_string;
             $milestone->project_id =$milestone_projectid;
             $milestone->save();
     

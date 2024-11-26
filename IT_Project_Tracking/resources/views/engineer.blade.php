@@ -53,7 +53,7 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link text-white {{ request()->is('systemsengineer') || request()->is('technicalengineer') ? 'active' : '' }}" 
-            href="{{ Auth::user()->role == 'System Engineer' ? URL::to('systemengineer') : URL::to('technicalengineer') }}">
+            href="{{ Auth::user()->role == 'Systems Engineer' ? URL::to('systemsengineer') : URL::to('technicalengineer') }}">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                   <i class="nav-icon fa-solid fa-window-maximize"></i>
               </div>
@@ -62,14 +62,6 @@
         </li>
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Manage</h6>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white {{(request() ->is('organization*')) ? 'active': ''}}" href="{{URL::to('organizations')}}">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fa-solid fa-building"></i>
-            </div>
-            <span class="nav-link-text ms-1">Organizations</span>
-          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white {{(request() ->is('project*')) ? 'active': ''}}" href="{{URL::to('projects')}}">
