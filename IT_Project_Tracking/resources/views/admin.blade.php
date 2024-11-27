@@ -285,7 +285,21 @@
 
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{URL::to('js/material-dashboard.min.js?v=3.1.0')}}"></script>
-  <script src="{{URL::to('js/app.js')}}"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="{{URL::to('assets/notify.min.js')}}"></script>
+  <script>
+    $(document).ready(function(){
+      @if ($errors->any())
+        @foreach ($errors->all() as $error)
+          $.notify("{{ $error }}", "error");
+        @endforeach
+      @endif
+
+      @if (session('success'))
+        $.notify("{{ session('success') }}", 'success');
+      @endif
+    })
+  </script>
   @yield('scripts')
 </body>
 

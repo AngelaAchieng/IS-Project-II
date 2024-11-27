@@ -64,6 +64,7 @@ class PaymentController extends Controller
         $payment_amount = $request->get('project_amount');
         $payment_date = $request->get('bdate');
         $payment_projectid = $request->get('Project_id');
+        
         $payment = Payment::find($Payment_id);
 
         if($payment){

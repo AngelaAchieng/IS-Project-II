@@ -48,11 +48,11 @@
                     <div class="mb-3">
                         <label class="form-label">Status</label>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="status" id="completed" value="Completed">
+                            <input class="form-check-input" type="checkbox" name="status[]" id="completed" value="Completed">
                             <label class="form-check-label" for="completed">Completed</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="status" id="pending" value="Pending">
+                            <input class="form-check-input" type="checkbox" name="status[]" id="pending" value="Pending">
                             <label class="form-check-label" for="pending">Pending</label>
                         </div>
                     </div>

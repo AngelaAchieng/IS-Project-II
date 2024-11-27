@@ -19,7 +19,7 @@
                 <div class="card-body pt-2">
                     <label class="mt-3">Project Amount</label>
                     <div class="input-group input-group-outline mb-4">
-                        <input type='integer' required name="project_amount" class="form-control">
+                        <input type='integer' value="{{$payment->Project_amount}}" required name="project_amount" class="form-control">
                     </div>
                     <label>Project</label>
                         <select name="Project_id" id="Project_id" class="form-control">
@@ -31,7 +31,7 @@
                     <div class="col-6 mb-2">
                         <div class="input-group input-group-static">
                             <label>Date</label>
-                            <input type='date' required name="bdate" class="form-control">
+                            <input type='date' value="{{$payment->Date}}" required name="bdate" class="form-control">
                         </div>
                     </div>
                     <div class="d-flex justify-content-end mt-4">

@@ -76,6 +76,7 @@ Route::get('milestone/delete/{Milestone_id}',[MilestoneController::class,'delete
 Route::get('payments',[PaymentController::class,'all']);
 Route::get('payment/add',[PaymentController::class,'add']);
 Route::post('payment/save',[PaymentController::class,'save']);
+Route::post('payment/update/{Payment_id}',[PaymentController::class,'update']);
 Route::get('payment/delete/{Payment_id}',[PaymentController::class,'delete']);
 Route::get('payment/edit/{Payment_id}',[PaymentController::class,'edit']);
 Route::get('payment/delete/{Payment_id}',[PaymentController::class,'delete']);
